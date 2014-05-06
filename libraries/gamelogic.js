@@ -1,4 +1,5 @@
-
+//TODO : fix blinker for Paused mode
+//TODO : Implement a ticker
 
 init = function () {
 
@@ -14,27 +15,34 @@ init = function () {
 			};
 	})();
 
-	
+//=============== INIT =======================================================================
 
 	//Initialize canvas and game variables
 	var canvas = document.getElementById('canvas'),
 		ctx = canvas.getContext( "2d" ), //create canvas context
 		W = 640; // get window's width
 		H = 480, //get window's height
-		count = 0, //counter for game's hit
+		score = 0, //scoreer for game's hit
 		reset = false,
-		color = "white";
+		color = "white",
+		paused = true;
 		
 		
 	var particles = []; //Array contaning particles
 	var ball = {};
 	var paddles = [2]; //Array containing paddles
-	var mouse = {};
+	var mouse = {
+			oldx: 0,
+			oldy: 0,
+			x : 0,
+			y: 0,
+			swing : false
+		};
 	var box = {};
-	var old_time = new Date().getTime() / 1000;
+	var old_time = old_time_mouse = old_swingON_time =new Date().getTime() / 1000;
 	
 	
-	
+
 
 	var ball = { // Ball object
 			x: 50,
@@ -43,7 +51,7 @@ init = function () {
 			c: "white",
 			vx: 4,
 			vy: 8,
-			
+			dir: "right",
 			// Function to draw a ball
 			draw : function() {
 
@@ -55,6 +63,14 @@ init = function () {
 			
 		}; 
 
+	//add dummy balls to the list, new balls will be added after a certain timer gets over
+	var ballList = [3];
+	ballList[0] = ball;
+	ballList[1] = ballList[2] = undefined ;
+
+//======================================================================================	
+
+	canvas.focus(); //gets canvas the focus of the window
 
 	//Function for creating paddle operations
 	function Paddle(pos) { 
@@ -86,7 +102,7 @@ init = function () {
 		return box;
 	}
 		
-	paddles.push ( new Paddle("bottom") );
+	paddles.push( new Paddle("bottom") );
 	paddles.push( new Paddle("top") );
 
 	function paintCanvas() {
@@ -94,6 +110,8 @@ init = function () {
 		ctx.fillRect(0, 0, W, H);
 	}
 
+
+//================== DRAW ====================================================================	
 
 	//draw everything
 	function draw() {
@@ -111,11 +129,24 @@ init = function () {
 			*/
 
 		}
-		ball.draw();
-		//show score
-		ctx.font = "15px Clean"
-		ctx.fillText( "Score = "+count, W-100,H-20 );
+
+		for( var i = 0; i < ballList.length; i++ ) {
+			if (ballList[i] != undefined) 
+					ballList[i].draw();
+        }
+
+        //function to show text on screen !
+        function showText(text, x, y){
+            ctx.font = "15px Clean"
+		    ctx.fillText( text, x,y );
+   
+
+        }
+
+		//show score		
+        showText( "Score = "+score, W-100, H-20 );
 		
+		//if game is in reset mode
 		var timeFlag = false;
 		if (reset == true) {
 			var new_time = new Date().getTime() / 1000;
@@ -124,27 +155,35 @@ init = function () {
 				timeFlag = true;
 				
 			}
-			//anonymous function to display message and reset the game !
-			(function(){
+			// (no-longer ) anonymous function to display message and reset the game !
+			function blink(text){
 				
 				ctx.fillStyle = color;
-				ctx.fillRect(W/2-5, H/2, 90, 30);
+				ctx.fillRect(W/2-25, H/2, 120, 30);
 				if (timeFlag == true){
 					color = color == "white" ? "black" : "white";
 				}
 				
 				ctx.fillStyle = color == "white" ? "black" : "white";
-				ctx.font = "15px Clean"
-				ctx.fillText( "SAMAAPT!", W/2,H/2+20 );
+				showText( text, W/2-20,H/2+20 );
 				
 			
-			})();
+			}
+			blink("SAMAAPT!");
+		}
+
+		//if game is in paused mode
+		if( paused == true ){
+			blink("Press P to play ! ");
 		}
 		
-	
+		//update the positions
 		update();
 	}
 	
+
+//======================================================================================	
+
 	//start the animation loop
 	function animLoop() {
 		requestAnimFrame(animLoop);
@@ -155,14 +194,18 @@ init = function () {
 	animLoop();
 	
 	
+//=========== UPDATE ===========================================================================	
+
 	function update(){
-		console.log(count);
-		if (reset == true) {			
+		if (reset == true || paused == true) {			
 			return;
 		}
 		
 		//Move the ball
-		ball.x += ball.vx, ball.y += ball.vy;
+		for( var i = 0; i < ballList.length; i++ ) {
+			if (ballList[i] != undefined) 
+					ballList[i].x += ballList[i].vx, ballList[i].y += ballList[i].vy;
+        }
 		
 		//move the paddles
 		if( mouse.x && mouse.y ) {
@@ -173,41 +216,82 @@ init = function () {
 			}	
 		}
 		
-		if( isColliding(ball) ){ //collision with wall
-			collidingAction(ball);
-		}
-		else if( isColliding(ball, paddles[1])  || isColliding(ball, paddles[2])){ //collision with either paddle
-				
-				if ( paddleHit == 1 ){
-					collidingAction(ball, paddles[1]);
+
+		for( var i = 0; i < ballList.length; i++ ) {
+			if (ballList[i] != undefined){
+				if( isColliding(ballList[i]) ){ //collision with wall
+					collidingAction(ballList[i]);
+				}
+				else if( isColliding(ballList[i], paddles[1])  || isColliding(ballList[i], paddles[2])){ //collision with either paddle
+						
+						if ( paddleHit == 1 ){
+							collidingAction(ballList[i], paddles[1]);
+							}
+						else {
+								collidingAction(ballList[i], paddles[2]);
+							}
 					}
-				else {
-						collidingAction(ball, paddles[2]);
-					}
-			}
-		else{
-			if ( ball.y > H || ball.y < 0 ){ //if ball goes out of the bound
-				resetgame();
+				else{
+					if ( ballList[i].y > H || ballList[i].y < 0 ){ //if ball goes out of the bound
+						resetgame();
+						}
+					}//ending else
+			}//ending undefined if 
+					
+        }//ending for
+
+
+		//SWING
+		//storing old mouse values after an interval
+		var new_time_mouse = new Date().getTime() / 1000;
+		if (new_time_mouse - old_time_mouse >= 0.1){
+			old_time_mouse = new_time_mouse;	
+			mouse.oldx = mouse.x;
+			
 			}
 
+		if ( mouse.x - mouse.oldx  > 100){
+			mouse.swing = true;
 			}		
+
+        //disable swing mode in case it is not disabled by collidingAction
+        if(mouse.swing){
+            var new_swingON_time = new Date().getTime() / 1000;
+            if (new_swingON_time - old_swingON_time > 0.5 ){ //disable after 2 seconds
+                mouse.swing = false;
+                old_swingON_time = new_swingON_time;                
+                }
+            }
 		
 	}
+
+//======================================================================================	
 	
 	//add mouse movement listener
 	canvas.addEventListener( "mousemove", trackPosition, true );
 	canvas.addEventListener( "mousedown", trackClick, false );
+	canvas.addEventListener( "keydown", pauseFlag, false );
+
 	
 	function trackPosition(e) {
+		
 		mouse.x = e.pageX;
 		mouse.y = e.pageY;
+
+		
 	}
 	
-	function trackClick(e){
-			count = reset == true ? 0 : count
-			reset = false;
-			
-		
+	function trackClick(e){ //restart the game and reset the score
+		score = reset == true ? 0 : score
+		reset = false;		
+	}
+
+	function pauseFlag(e){ // toggle paused time
+		if ( e.keyCode == 80 ) //check for button p
+			{
+				paused = paused == true ? false : true ;
+			}
+			printDebug();
 	}
 	
 	//collision check
@@ -236,6 +320,7 @@ init = function () {
 		if ( object == undefined ) //object is wall
 			{	
 			  ball.vx = -ball.vx;
+			  ball.dir = ball.dir == "left" ? "right" : "left";
 			}
 		else {
 			ball.vy = -ball.vy;
@@ -245,7 +330,13 @@ init = function () {
 			else {
 				//ball.y = object.y;
 			}		
-			count++;
+			score++;
+			//performing the swing action
+			if ( mouse.swing == true ){
+				ball.vx = -ball.vx;
+				ball.dir = ball.dir == "left" ? "right" : "left";
+				mouse.swing = false;
+			}
 		}
 			
 		
@@ -256,6 +347,20 @@ init = function () {
 		ball.x = W/2, ball.y = H/2, ball.vy = -ball.vy;
 		reset = true;
 		
+	}
+
+	function printDebug(){
+		console.log( "================================================" )
+		for( var i = 0; i < ballList.length; i++ ) {
+			if (ballList[i] != undefined){
+				console.log("Ball : "+ i + " X-> " + ballList[i].x + " Y-> " + ballList[i].y + " Dir-> " + ballList[i].dir );
+			}
+		}
+
+		for( var i = 1; i < paddles.length; i++ ) {
+				console.log("Paddle : "+ i + " X-> " + paddles[i].x + " Y-> " + paddles[i].y);
+		}
+
 	}
 	
 
