@@ -104,13 +104,30 @@
       <div class="container mx-auto px-2 py-4">
         
           <!-- Renders post date, title, and snippet of text. -->
-<div class="py-2 mb-2 prose">
+<!-- <div class="py-2 mb-2 prose">
   <a class="no-underline h5 bold text-accent" title="/jekyll/update/2020/06/06/welcome-to-jekyll.html" href="/jekyll/update/2020/06/06/welcome-to-jekyll.html">Jun 6, 2020</a>
   <h2 class="h1 lh-condensed col-9 mt-0">
     <a class="link-primary" title="/jekyll/update/2020/06/06/welcome-to-jekyll.html" href="/jekyll/update/2020/06/06/welcome-to-jekyll.html">Welcome to Jekyll!</a>
   </h2>
   <p>You’ll find this post in your _posts directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways,...</p>
-</div>
+</div> -->
+
+<ul>
+  {% for post in site.posts %}
+    <li>
+      <a class="no-underline h5 bold text-accent" href="{{ post.url }}">{{ post.title }}</a>
+      <div class="py-2 mb-2 prose">
+        <a class="no-underline h5 bold text-accent" title="{{ post.title }}" href="{{ post.url }}">{{ post.date }}</a>
+        <h2 class="h1 lh-condensed col-9 mt-0">
+          <a class="link-primary" title="{{ post.title }}" href="{{ post.url }}">{{ post.title }}</a>
+        </h2>
+        <p>You’ll find this post in your _posts directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways,...</p>
+      </div>
+    </li>
+  {% endfor %}
+</ul>
+
+
 
         
       </div>
