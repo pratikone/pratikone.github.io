@@ -1,11 +1,11 @@
 ---
 layout: post
-title:  "Anatomy of Hello World of Windows programming"
+title:  "Anatomy of Windows Hello World program"
 date:   2020-06-07 14:29:37 -0700
 categories: c++ windows-hello-world
 ---
 
-# Anatomy of Hello World of Windows programming
+# Anatomy of Windows Hello World program
 
 Windows programming is in state of constant change since the dawn of Win32 api (even before that) - whether it is move to .NET, again to WPF, introduction of Modern Apps which then got changed to UWP and now finally Project Reunion (merger of Windows apis announced in Build 2020). One thing that hasn’t changed at all in this is how to write a hello world in Windows. Since Win95, it has largely remained the same. However, a lot has changed internally. Windows does a lot of work under the hood to make sure the simple hello world continues to work even when the kernel changes (Win 98 -> Win XP)  and large scale OS changes (XP -> Vista, Win7 -> Windows 8/10). This blog attempts to go deeper into the hello world to showcase the rich technical background of windows hello world and a little bit of history.
 Intro
