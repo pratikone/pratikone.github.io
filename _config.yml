@@ -18,6 +18,16 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 
+#dependencies
+highlighter: rouge
+markdown: kramdown
+# Jekyll 3 now only supports Kramdown for Markdown
+kramdown:
+    # Use GitHub flavored markdown, including triple backtick fenced code blocks
+    input: GFM
+    # Jekyll 3 and GitHub Pages now only support rouge for syntax highlighting
+    syntax_highlighter: rouge
+
 title: Your awesome title
 email: your-email@example.com
 description: >- # this means to ignore newlines until "baseurl:"
@@ -54,15 +64,4 @@ plugins:
 #   - vendor/gems/
 #   - vendor/ruby/
 
-theme: minima
-highlighter: rouge
-markdown: kramdown
-# Jekyll 3 now only supports Kramdown for Markdown
-kramdown:
-    # Use GitHub flavored markdown, including triple backtick fenced code blocks
-    input: GFM
-    # Jekyll 3 and GitHub Pages now only support rouge for syntax highlighting
-    syntax_highlighter: rouge
-    syntax_highlighter_opts:
-        # Use existing pygments syntax highlighting css
-        css_class: 'highlight'
+# theme: minima
