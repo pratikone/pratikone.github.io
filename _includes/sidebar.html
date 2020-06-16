@@ -10,18 +10,9 @@
     </div>
 
     <nav class="sidebar-nav">
-      <!-- <a class="sidebar-nav-item{% if page.title == "Home" %} active{% endif %}" href="{{ site.baseurl }}">Home</a> -->
-      <ul class="nav">
-        <li><a href="{{site.url}}">home</a></li>
-        <li><a href="http://thiagomarzagao.com/about/">about</a></li>
-        <li><a href="http://thiagomarzagao.com/publications/">publications</a></li>
-        <li><a href="http://thiagomarzagao.com/code/">code</a></li>
-        <li><a href="http://thiagomarzagao.com/talks%20&%20slides/">talks & slides</a></li>
-        <li><a href="http://thiagomarzagao.com/teaching/">teaching</a></li>
-        <li><a href="http://thiagomarzagao.com/committees/">committees</a></li>
-        <li><a href="http://thiagomarzagao.com/resources/">resources</a></li>
-        <li><a href="http://thiagomarzagao.com/index/">index</a></li>
-    </ul>
+      <a class="sidebar-nav-item{% if page.title == "Home" %} active{% endif %}" href="{{ site.url }}">Home</a>
+      <a class="sidebar-nav-item" href="https://twitter.com/pratikone">Twitter</a>
+      <a class="sidebar-nav-item" href="https://www.linkedin.com/in/pratikone/">LinkedIn</a>
 
       {% comment %}
         The code below dynamically generates a sidebar nav of pages with
@@ -37,9 +28,6 @@
         {% endif %}
       {% endfor %}
 
-      <a class="sidebar-nav-item" href="{{ site.github.repo }}/archive/v{{ site.version }}.zip">Download</a>
-      <a class="sidebar-nav-item" href="{{ site.github.repo }}">GitHub project</a>
-      <span class="sidebar-nav-item">Currently v{{ site.version }}</span>
     </nav>
 
     <p>&copy; {{ site.time | date: '%Y' }}. All rights reserved.</p>

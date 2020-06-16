@@ -8,7 +8,7 @@
 
   <title>
     
-      Hyde &middot; A Jekyll theme
+      Pratik Anand &middot; coding तरकारी
     
   </title>
 
@@ -30,25 +30,16 @@
     <div class="sidebar-about">
       <h1>
         <a href="">
-          Hyde
+          Pratik Anand
         </a>
       </h1>
-      <p class="lead">A brazen two-column <a href="https://jekyllrb.com" target="_blank">Jekyll</a> theme that pairs a prominent sidebar with uncomplicated content. Made by <a href="https://twitter.com/mdo" target="_blank">@mdo</a>.</p>
+      <p class="lead">Coding <a href="https://en.wikipedia.org/wiki/Tarkari" target="_blank">तरकारी</a> is my space to put random assortment of tech posts. Follow me at <a href="https://twitter.com/pratikone" target="_blank">@pratikone</a>.</p>
     </div>
 
     <nav class="sidebar-nav">
-      <!-- <a class="sidebar-nav-item active" href="">Home</a> -->
-      <ul class="nav">
-        <li><a href="http://localhost:4000">home</a></li>
-        <li><a href="http://thiagomarzagao.com/about/">about</a></li>
-        <li><a href="http://thiagomarzagao.com/publications/">publications</a></li>
-        <li><a href="http://thiagomarzagao.com/code/">code</a></li>
-        <li><a href="http://thiagomarzagao.com/talks%20&%20slides/">talks & slides</a></li>
-        <li><a href="http://thiagomarzagao.com/teaching/">teaching</a></li>
-        <li><a href="http://thiagomarzagao.com/committees/">committees</a></li>
-        <li><a href="http://thiagomarzagao.com/resources/">resources</a></li>
-        <li><a href="http://thiagomarzagao.com/index/">index</a></li>
-    </ul>
+      <a class="sidebar-nav-item active" href="http://localhost:4000">Home</a>
+      <a class="sidebar-nav-item" href="https://twitter.com/pratikone">Twitter</a>
+      <a class="sidebar-nav-item" href="https://www.linkedin.com/in/pratikone/">LinkedIn</a>
 
       
 
@@ -67,9 +58,6 @@
         
       
 
-      <a class="sidebar-nav-item" href="/archive/v3.0.0.zip">Download</a>
-      <a class="sidebar-nav-item" href="">GitHub project</a>
-      <span class="sidebar-nav-item">Currently v3.0.0</span>
     </nav>
 
     <p>&copy; 2020. All rights reserved.</p>
@@ -82,19 +70,17 @@
   
   <div class="post">
     <h1 class="post-title">
-      <a href="http://localhost:4000/c++/windows-hello-world/2020/06/07/anatomy-of-windows-hello-world.html">
+      <a href="http://localhost:4000/c++/2020/06/07/anatomy-of-windows-hello-world.html">
         Anatomy of Windows Hello World program
       </a>
     </h1>
 
     <span class="post-date">07 Jun 2020</span>
 
-    <h1 id="anatomy-of-windows-hello-world-program">Anatomy of Windows Hello World program</h1>
-
-<p>Windows programming is in state of constant change since the dawn of Win32 api (even before that) - whether it is move to .NET, again to WPF, introduction of Modern Apps which then got changed to UWP and now finally Project Reunion (merger of Windows apis announced in Build 2020). One thing that hasn’t changed at all in this is how to write a hello world in Windows. Since Win95, it has largely remained the same. However, a lot has changed internally. Windows does a lot of work under the hood to make sure the simple hello world continues to work even when the kernel changes (Win 98 -&gt; Win XP)  and large scale OS changes (XP -&gt; Vista, Win7 -&gt; Windows 8/10). This blog attempts to go deeper into the hello world to showcase the rich technical background of windows hello world and a little bit of history.</p>
-
-<p>Win32 api are the system level api for programming Windows at the lowest level. When Windows transitioned to 32-bits OS with Win95, they wanted a way to distinguish between old WinApi for 16-bit Win 3.1 OS and the newer 32-bit apis. Those 32-bit api got the name Win32. Once the api became popular, they lost their original meaning. Changing to Win64 for 64-bit Windows or just Windows Api would have caused a whole lot more confusion and change of documents to remove 32 from the name. So, Win32 naming got stuck. Every Windows api is now Win32, whether it is 32-bit or 64-bit or future-quantum-bit. <a href="https://en.wikipedia.org/wiki/Windows_API">https://en.wikipedia.org/wiki/Windows_API</a>
-The hello world code for Win32 has largely unchanged since its inception except when the infamous hello world program got replaced with a shorter version because it was intimidating to beginners. <a href="http://www.charlespetzold.com/blog/2014/12/The-Infamous-Windows-Hello-World-Program.html">http://www.charlespetzold.com/blog/2014/12/The-Infamous-Windows-Hello-World-Program.html</a>. This anatomy is not of that infamous code but the successor since Win95 days which is decent sized and captures a lot of Windows functionality in itself. Let’s start by comparing this hello world with its console cousin.</p>
+    <p>Windows programming is in state of constant change since the introduction of Win32 api - whether it is move to .NET, again to WPF, introduction of Modern Apps which then got changed to UWP and now finally <a href="https://github.com/microsoft/ProjectReunion">Project Reunion</a>. One thing that hasn’t changed at all in this is how to write a hello world in Windows. Since Win95, it has largely remained the same. However, a lot has changed internally. Windows does a lot of work under the hood to make sure the simple hello world continues to work even when the kernel changes (Win 98 -&gt; Win XP)  and large scale OS changes (XP -&gt; Vista, Win7 -&gt; Windows 8/10). This blog attempts to go deeper into the hello world to showcase the rich technical background of windows hello world and a little bit of history.  <br />
+<img src="https://1000logos.net/wp-content/uploads/2019/08/Windows-Logo-history.jpg" alt="logos of all Windows versions" title="All windows versions" />
+Win32 api are the system level api for programming Windows at the lowest level. When Windows transitioned to 32-bits OS with Win95, they wanted a way to distinguish between old WinApi for 16-bit Win 3.1 OS and the newer 32-bit apis. Those 32-bit api got the name Win32. Once the api became popular, they lost their original meaning. Changing to Win64 for 64-bit Windows or just Windows Api would have caused a whole lot more confusion and change of documents to remove 32 from the name. So, Win32 naming got stuck. Every <a href="https://en.wikipedia.org/wiki/Windows_API">Windows api</a> is now Win32, whether it is 32-bit, 64-bit or any future foo-quantum-bit.
+The hello world code for Win32 has largely unchanged since its inception except when the <a href="http://www.charlespetzold.com/blog/2014/12/The-Infamous-Windows-Hello-World-Program.html">infamous hello world program</a> got replaced with a shorter version because it was intimidating to beginners. This anatomy is not of that infamous code but the successor since Win95 days which is decent sized and captures a lot of Windows functionality in itself. Let’s start by comparing this hello world with its console cousin.</p>
 
 <h1 id="console-hello-world">Console hello world</h1>
 <div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;iostream&gt;
@@ -201,7 +187,7 @@ Now that, it is out of the way, let’s follow this code block by block.</p>
 #include &lt;windows.h&gt;    
 </span></code></pre></div></div>
 <p>Over the years, Windows programming has undergone large changes, like move from 16-bit to 32-bit api in Win95, move to NT kernel with XP and later changes for Vista and Windows 8. Any app whether the one developed in 1995 or in 2008 which calls windows.h must continue to work in the latest version of Windows.  Windows.h and Win32 apis do a lot of heavy duty work to ensure that all these apps remain compatible even when they are all including the same header.  For example, if you are developing a new app which uses a legacy component (from Windows 95 era referring to windows.h header files of that era ),  it is possible that your new component and legacy component will consume the same windows.h (from latest Windows SDK) and yet, pick up the era-appropriate functions.
-It is a catch-all header for most common windows system calls. Windows.h, a small file on its own, carries forward declaration for multiple headers. For this hello world code, the apis are in winuser.h and linked using user32.dll. For any other functionality, some other header might be needed. Windows.h makes it easy by acting as a “router” for all these headers. You only need to include windows.h header and you get all this functionality. As MSDN page mentions, you can carefully select a different or smaller subset of functionality by defining few global identifiers like UNICODE here which indicates to use unicode variant of specific apis, denoted by W. <code class="language-plaintext highlighter-rouge">CreateFoo</code> resolves to <code class="language-plaintext highlighter-rouge">CreateFooW</code> (https://docs.microsoft.com/en-us/windows/win32/winprog/using-the-windows-headers).</p>
+It is a catch-all header for most common windows system calls. Windows.h, a small file on its own, carries forward declaration for multiple headers. For this hello world code, the apis are in winuser.h and linked using user32.dll. For any other functionality, some other header might be needed. Windows.h makes it easy by acting as a “router” for all these headers. You only need to include windows.h header and you get all this functionality. As MSDN page mentions, you can carefully select a different or smaller subset of functionality by defining few global identifiers like UNICODE here which indicates to use unicode variant of specific apis, denoted by W. <code class="language-plaintext highlighter-rouge">CreateFoo</code> resolves to <code class="language-plaintext highlighter-rouge">CreateFooW</code> <a href="https://docs.microsoft.com/en-us/windows/win32/winprog/using-the-windows-headers">Details</a>.</p>
 
 <h3 id="main-function">Main function</h3>
 <div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="n">WINAPI</span> <span class="nf">wWinMain</span><span class="p">(</span><span class="n">HINSTANCE</span> <span class="n">hInstance</span><span class="p">,</span> <span class="n">HINSTANCE</span><span class="p">,</span> <span class="n">PWSTR</span> <span class="n">pCmdLine</span><span class="p">,</span> <span class="kt">int</span> <span class="n">nCmdShow</span><span class="p">)</span>
@@ -260,8 +246,7 @@ HINSTANCE is also another of the interesting artefact. This <a href="https://dev
 <h3 id="window-of-windows---hwnd-pronounced-as-h-wind">Window of Windows - Hwnd (pronounced as h-wind)</h3>
 
 <h4 id="what-is-an-hwnd-">What is an Hwnd ?</h4>
-<p>&lt;pictures of hwnd : &gt;
-<img src="https://docs.microsoft.com/en-us/windows/win32/learnwin32/images/window01.png" alt="picture of a window UI" title="Hwnd" /></p>
+<p><img src="https://docs.microsoft.com/en-us/windows/win32/learnwin32/images/window01.png" alt="picture of a window UI" title="Hwnd" /></p>
 
 <p>“Obviously, windows are central to Windows. They are so important that they named the operating system after them.” - <a href="https://docs.microsoft.com/en-us/windows/win32/learnwin32/what-is-a-window-">Official MSDN quote</a>  <br />
 A window is a rectangular area on the screen that receives user input and displays output in the form of text and graphics. In Win32 programming convention, a window is referenced by HWND - handle to a window. A handle is a numerical value associated with that window. In the kernel, an object is created for every window with an unique id. This id is stored in that window’s handle. For easy understanding, assume hwnd and its window are one and the same thing. If a statement says, change the size of hwnd, that is referring to the window referenced by that hwnd. If a window is a person, hwnd is its name.

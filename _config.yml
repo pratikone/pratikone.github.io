@@ -1,10 +1,10 @@
 # Setup
-title:            Hyde
-tagline:          'A Jekyll theme'
-description:      'A brazen two-column <a href="https://jekyllrb.com" target="_blank">Jekyll</a> theme that pairs a prominent sidebar with uncomplicated content. Made by <a href="https://twitter.com/mdo" target="_blank">@mdo</a>.'
+title:            Pratik Anand
+tagline:          'coding तरकारी'
+description:      'Coding <a href="https://en.wikipedia.org/wiki/Tarkari" target="_blank">तरकारी</a> is my space to put random assortment of tech posts. Follow me at <a href="https://twitter.com/pratikone" target="_blank">@pratikone</a>.'
 url:              https://pratikone.github.io
 baseurl:          ""
-paginate:         5
+paginate:         1
 
 # About and contact
 author:

@@ -2,15 +2,12 @@
 layout: post
 title:  "Anatomy of Windows Hello World program"
 date:   2020-06-07 14:29:37 -0700
-categories: c++ windows-hello-world
+categories: c++
 ---
-
-# Anatomy of Windows Hello World program
-
-Windows programming is in state of constant change since the dawn of Win32 api (even before that) - whether it is move to .NET, again to WPF, introduction of Modern Apps which then got changed to UWP and now finally Project Reunion (merger of Windows apis announced in Build 2020). One thing that hasn’t changed at all in this is how to write a hello world in Windows. Since Win95, it has largely remained the same. However, a lot has changed internally. Windows does a lot of work under the hood to make sure the simple hello world continues to work even when the kernel changes (Win 98 -> Win XP)  and large scale OS changes (XP -> Vista, Win7 -> Windows 8/10). This blog attempts to go deeper into the hello world to showcase the rich technical background of windows hello world and a little bit of history.    
-
-Win32 api are the system level api for programming Windows at the lowest level. When Windows transitioned to 32-bits OS with Win95, they wanted a way to distinguish between old WinApi for 16-bit Win 3.1 OS and the newer 32-bit apis. Those 32-bit api got the name Win32. Once the api became popular, they lost their original meaning. Changing to Win64 for 64-bit Windows or just Windows Api would have caused a whole lot more confusion and change of documents to remove 32 from the name. So, Win32 naming got stuck. Every Windows api is now Win32, whether it is 32-bit or 64-bit or future-quantum-bit. <https://en.wikipedia.org/wiki/Windows_API>
-The hello world code for Win32 has largely unchanged since its inception except when the infamous hello world program got replaced with a shorter version because it was intimidating to beginners. <http://www.charlespetzold.com/blog/2014/12/The-Infamous-Windows-Hello-World-Program.html>. This anatomy is not of that infamous code but the successor since Win95 days which is decent sized and captures a lot of Windows functionality in itself. Let’s start by comparing this hello world with its console cousin.
+Windows programming is in state of constant change since the introduction of Win32 api - whether it is move to .NET, again to WPF, introduction of Modern Apps which then got changed to UWP and now finally [Project Reunion](https://github.com/microsoft/ProjectReunion). One thing that hasn’t changed at all in this is how to write a hello world in Windows. Since Win95, it has largely remained the same. However, a lot has changed internally. Windows does a lot of work under the hood to make sure the simple hello world continues to work even when the kernel changes (Win 98 -> Win XP)  and large scale OS changes (XP -> Vista, Win7 -> Windows 8/10). This blog attempts to go deeper into the hello world to showcase the rich technical background of windows hello world and a little bit of history.    
+![logos of all Windows versions](https://1000logos.net/wp-content/uploads/2019/08/Windows-Logo-history.jpg "All windows versions")
+Win32 api are the system level api for programming Windows at the lowest level. When Windows transitioned to 32-bits OS with Win95, they wanted a way to distinguish between old WinApi for 16-bit Win 3.1 OS and the newer 32-bit apis. Those 32-bit api got the name Win32. Once the api became popular, they lost their original meaning. Changing to Win64 for 64-bit Windows or just Windows Api would have caused a whole lot more confusion and change of documents to remove 32 from the name. So, Win32 naming got stuck. Every [Windows api](https://en.wikipedia.org/wiki/Windows_API) is now Win32, whether it is 32-bit, 64-bit or any future foo-quantum-bit.
+The hello world code for Win32 has largely unchanged since its inception except when the [infamous hello world program](http://www.charlespetzold.com/blog/2014/12/The-Infamous-Windows-Hello-World-Program.html) got replaced with a shorter version because it was intimidating to beginners. This anatomy is not of that infamous code but the successor since Win95 days which is decent sized and captures a lot of Windows functionality in itself. Let’s start by comparing this hello world with its console cousin.
 
 Console hello world
 ======================
@@ -121,7 +118,7 @@ Now that, it is out of the way, let’s follow this code block by block.
 #include <windows.h>    
 ```
 Over the years, Windows programming has undergone large changes, like move from 16-bit to 32-bit api in Win95, move to NT kernel with XP and later changes for Vista and Windows 8. Any app whether the one developed in 1995 or in 2008 which calls windows.h must continue to work in the latest version of Windows.  Windows.h and Win32 apis do a lot of heavy duty work to ensure that all these apps remain compatible even when they are all including the same header.  For example, if you are developing a new app which uses a legacy component (from Windows 95 era referring to windows.h header files of that era ),  it is possible that your new component and legacy component will consume the same windows.h (from latest Windows SDK) and yet, pick up the era-appropriate functions.
-It is a catch-all header for most common windows system calls. Windows.h, a small file on its own, carries forward declaration for multiple headers. For this hello world code, the apis are in winuser.h and linked using user32.dll. For any other functionality, some other header might be needed. Windows.h makes it easy by acting as a “router” for all these headers. You only need to include windows.h header and you get all this functionality. As MSDN page mentions, you can carefully select a different or smaller subset of functionality by defining few global identifiers like UNICODE here which indicates to use unicode variant of specific apis, denoted by W. `CreateFoo` resolves to `CreateFooW` (https://docs.microsoft.com/en-us/windows/win32/winprog/using-the-windows-headers).
+It is a catch-all header for most common windows system calls. Windows.h, a small file on its own, carries forward declaration for multiple headers. For this hello world code, the apis are in winuser.h and linked using user32.dll. For any other functionality, some other header might be needed. Windows.h makes it easy by acting as a “router” for all these headers. You only need to include windows.h header and you get all this functionality. As MSDN page mentions, you can carefully select a different or smaller subset of functionality by defining few global identifiers like UNICODE here which indicates to use unicode variant of specific apis, denoted by W. `CreateFoo` resolves to `CreateFooW` [Details](https://docs.microsoft.com/en-us/windows/win32/winprog/using-the-windows-headers).
 
 ### Main function
 ```c++
@@ -181,7 +178,6 @@ HINSTANCE is also another of the interesting artefact. This [blogpost by Raymond
 ### Window of Windows - Hwnd (pronounced as h-wind)
 
 #### What is an Hwnd ?    
-<pictures of hwnd : >
 ![picture of a window UI](https://docs.microsoft.com/en-us/windows/win32/learnwin32/images/window01.png "Hwnd")    
 
 "Obviously, windows are central to Windows. They are so important that they named the operating system after them." - [Official MSDN quote](https://docs.microsoft.com/en-us/windows/win32/learnwin32/what-is-a-window-)    
