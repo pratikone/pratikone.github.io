@@ -1,153 +1,624 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en-us">
 
   <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
 
-  <title>Your awesome title</title>
-  <meta name="description" content="Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.">
+  <title>
+    
+      Hyde &middot; A Jekyll theme
+    
+  </title>
 
-  
-  
-  <link rel="stylesheet" href="http://localhost:4000/assets/style.css">
+  <link rel="stylesheet" href="http://localhost:4000/public/css/poole.css">
+  <link rel="stylesheet" href="http://localhost:4000/public/css/syntax.css">
+  <link rel="stylesheet" href="http://localhost:4000/public/css/hyde.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
 
-  <link rel="canonical" href="http://localhost:4000/">
-  <link rel="alternate" type="application/rss+xml" title="Your awesome title" href="http://localhost:4000/feed.xml">
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://localhost:4000/public/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="http://localhost:4000/public/favicon.ico">
 
-  <script async defer src="https://buttons.github.io/buttons.js"></script>
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="http://localhost:4000/atom.xml">
 </head>
-
 
   <body>
 
-    <div>
-
-      <header class="header-background">
-
-        <div class="clearfix border-bottom-thick header-border">
-          <ul class="list-reset right py-1 header-text font-smoothing">
-            
-              
-            
-              
-              <li class="inline-block">
-                <a class="align-middle link-primary header-link mr-2" href="/about/">About</a>
-              </li>
-              
-            
-              
-            
-              
-            
-              
-            
-          </ul>
-        </div>
-
-        <div class="container mx-auto px-2 mb-2 clearfix header-text">
-          <h1 class="h0 inline-block col-9 sm-width-full py-4 mt-3 header-title">Your awesome title</h1>
-
-          <div class="clearfix mb-4 py-1">
-            <div class="col-4 sm-width-full left border-top-thin">
-              <div class="table">
-                <div class="inline-block mt-3 mr-1">
-                  <svg height="32" class="header-social-accent" version="1.1" width="32" viewBox="0 0 16 16" aria-hidden="true">
- <circle cx="8" cy="8" r="8"/>
-</svg>
-
-                </div>
-                <div class="inline-block mt-3 mr-1">
-                  <svg height="32" class="header-social-accent" version="1.1" width="32" viewBox="0 0 16 16" aria-hidden="true">
- <circle cx="8" cy="8" r="8"/>
-</svg>
-
-                </div>
-                <div class="inline-block mt-3">
-                  <a href="https://github.com/jekyll/" title="Fork me on GitHub" class="link-social block">
-<svg height="32" class="octicon octicon-mark-github header-social" viewBox="0 0 16 16" version="1.1" width="32" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
-</svg>
-</a>
-
-                </div>
-              </div>
-              <!-- Set site description in config.yml -->
-              <p class="h4 lh-condensed font-smoothing mt-2 py-1">Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</p>
-            </div>
-
-            <div class="col-4 sm-width-full left border-top-thin mt-3 mt-lg-0 ml-lg-4 table">
-                <div class="inline-block mt-3 mr-1">
-                  <svg height="32" class="header-social" version="1.1" width="32" viewBox="0 0 16 16" aria-hidden="true">
- <circle cx="8" cy="8" r="8"/>
-</svg>
-
-                </div>
-                <div class="inline-block mt-3">
-                  <a href="https://twitter.com/" title="Follow me on twitter" class="link-social block">
-  <svg height="32" class="header-social" version="1.1" width="32" viewBox="0 0 16 16" aria-hidden="true">
-    <path d="M8,0C3.6,0,0,3.6,0,8s3.6,8,8,8s8-3.6,8-8S12.4,0,8,0z M12,6c0,0.1,0,0.2,0,0.3c0,2.7-2.1,5.8-5.8,5.8
-  	c-1.2,0-2.2-0.3-3.1-0.9c0.2,0,0.3,0,0.5,0c1,0,1.8-0.3,2.5-0.9c-0.9,0-1.7-0.6-1.9-1.4c0.1,0,0.3,0,0.4,0c0.2,0,0.4,0,0.5-0.1
-  	c-0.9-0.2-1.6-1-1.6-2v0C3.7,6.9,4,7,4.3,7.1c-0.5-0.4-0.9-1-0.9-1.7c0-0.4,0.1-0.7,0.3-1c1,1.2,2.5,2.1,4.2,2.1
-  	c0-0.2-0.1-0.3-0.1-0.5c0-1.1,0.9-2,2.1-2c0.6,0,1.1,0.2,1.5,0.6c0.5-0.1,0.9-0.3,1.3-0.5c-0.2,0.5-0.5,0.9-0.9,1.1
-  	c0.4,0,0.8-0.2,1.2-0.3h0C12.7,5.3,12.4,5.7,12,6z"/>
-  </svg>
-</a>
-
-                </div>
-            </div>
-          </div>
-
-        </div>
-      </header>
-
-      <div class="container mx-auto px-2 py-4">
-        
-          <!-- Renders post date, title, and snippet of text. -->
-<!-- <div class="py-2 mb-2 prose">
-  <a class="no-underline h5 bold text-accent" title="/jekyll/update/2020/06/06/welcome-to-jekyll.html" href="/jekyll/update/2020/06/06/welcome-to-jekyll.html">Jun 6, 2020</a>
-  <h2 class="h1 lh-condensed col-9 mt-0">
-    <a class="link-primary" title="/jekyll/update/2020/06/06/welcome-to-jekyll.html" href="/jekyll/update/2020/06/06/welcome-to-jekyll.html">Welcome to Jekyll!</a>
-  </h2>
-  <p>You’ll find this post in your _posts directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways,...</p>
-</div> -->
-
-<ul>
-  {% for post in site.posts %}
-    <li>
-      <a class="no-underline h5 bold text-accent" href="{{ post.url }}">{{ post.title }}</a>
-      <div class="py-2 mb-2 prose">
-        <a class="no-underline h5 bold text-accent" title="{{ post.title }}" href="{{ post.url }}">{{ post.date }}</a>
-        <h2 class="h1 lh-condensed col-9 mt-0">
-          <a class="link-primary" title="{{ post.title }}" href="{{ post.url }}">{{ post.title }}</a>
-        </h2>
-      </div>
-    </li>
-  {% endfor %}
-</ul>
-
-
-
-        
-      </div>
-
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="">
+          Hyde
+        </a>
+      </h1>
+      <p class="lead">A brazen two-column <a href="https://jekyllrb.com" target="_blank">Jekyll</a> theme that pairs a prominent sidebar with uncomplicated content. Made by <a href="https://twitter.com/mdo" target="_blank">@mdo</a>.</p>
     </div>
 
-    <div class="border-top-thin clearfix mt-2 mt-lg-4">
-  <div class="container mx-auto px-2">
-    <p class="col-8 sm-width-full left py-2 mb-0">This project is maintained by <a class="text-accent" href="https://github.com/jekyll">jekyll</a></p>
-    <ul class="list-reset right clearfix sm-width-full py-2 mb-2 mb-lg-0">
-      <li class="inline-block mr-1">
-        <a href="https://twitter.com/share" class="twitter-share-button" data-hashtags="Your awesome title">Tweet</a> <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-      </li>
-      <li class="inline-block">
-        <a class="github-button" href="https://github.com/jekyll/" data-icon="octicon-star" data-count-href="jekyll//stargazers" data-count-api="/repos/jekyll/#stargazers_count" data-count-aria-label="# stargazers on GitHub" aria-label="Star jekyll/ on GitHub">Star</a>
-      </li>
-    </ul>
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item active" href="">Home</a>
+
+      
+
+      
+      
+        
+          
+            <a class="sidebar-nav-item" href="http://localhost:4000/about.html">About</a>
+          
+        
+      
+        
+      
+        
+          
+        
+      
+
+      <a class="sidebar-nav-item" href="/archive/v3.0.0.zip">Download</a>
+      <a class="sidebar-nav-item" href="">GitHub project</a>
+      <span class="sidebar-nav-item">Currently v3.0.0</span>
+    </nav>
+
+    <p>&copy; 2020. All rights reserved.</p>
   </div>
 </div>
 
 
-  </body>
+    <div class="content container">
+      <div class="posts">
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="http://localhost:4000/c++/windows-hello-world/2020/06/07/anatomy-of-windows-hello-world.html">
+        Anatomy of Windows Hello World program
+      </a>
+    </h1>
 
+    <span class="post-date">07 Jun 2020</span>
+
+    <h1 id="anatomy-of-windows-hello-world-program">Anatomy of Windows Hello World program</h1>
+
+<p>Windows programming is in state of constant change since the dawn of Win32 api (even before that) - whether it is move to .NET, again to WPF, introduction of Modern Apps which then got changed to UWP and now finally Project Reunion (merger of Windows apis announced in Build 2020). One thing that hasn’t changed at all in this is how to write a hello world in Windows. Since Win95, it has largely remained the same. However, a lot has changed internally. Windows does a lot of work under the hood to make sure the simple hello world continues to work even when the kernel changes (Win 98 -&gt; Win XP)  and large scale OS changes (XP -&gt; Vista, Win7 -&gt; Windows 8/10). This blog attempts to go deeper into the hello world to showcase the rich technical background of windows hello world and a little bit of history.</p>
+
+<p>Win32 api are the system level api for programming Windows at the lowest level. When Windows transitioned to 32-bits OS with Win95, they wanted a way to distinguish between old WinApi for 16-bit Win 3.1 OS and the newer 32-bit apis. Those 32-bit api got the name Win32. Once the api became popular, they lost their original meaning. Changing to Win64 for 64-bit Windows or just Windows Api would have caused a whole lot more confusion and change of documents to remove 32 from the name. So, Win32 naming got stuck. Every Windows api is now Win32, whether it is 32-bit or 64-bit or future-quantum-bit. <a href="https://en.wikipedia.org/wiki/Windows_API">https://en.wikipedia.org/wiki/Windows_API</a>
+The hello world code for Win32 has largely unchanged since its inception except when the infamous hello world program got replaced with a shorter version because it was intimidating to beginners. <a href="http://www.charlespetzold.com/blog/2014/12/The-Infamous-Windows-Hello-World-Program.html">http://www.charlespetzold.com/blog/2014/12/The-Infamous-Windows-Hello-World-Program.html</a>. This anatomy is not of that infamous code but the successor since Win95 days which is decent sized and captures a lot of Windows functionality in itself. Let’s start by comparing this hello world with its console cousin.</p>
+
+<h1 id="console-hello-world">Console hello world</h1>
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;iostream&gt;
+</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Hello World!</span><span class="se">\n</span><span class="s">"</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>That is pretty straight-forward. You call the IO header, entry point is main() and it calls cout function in std namespace which prints hello world. Compare it to win32 hello world.</p>
+
+<p>Windows hello world</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#ifndef UNICODE
+#define UNICODE
+#endif
+</span>
+<span class="cp">#include &lt;windows.h&gt;
+</span>
+<span class="n">LRESULT</span> <span class="n">CALLBACK</span> <span class="nf">WindowProc</span><span class="p">(</span><span class="n">HWND</span> <span class="n">hwnd</span><span class="p">,</span> <span class="n">UINT</span> <span class="n">uMsg</span><span class="p">,</span> <span class="n">WPARAM</span> <span class="n">wParam</span><span class="p">,</span> <span class="n">LPARAM</span> <span class="n">lParam</span><span class="p">);</span>
+
+<span class="kt">int</span> <span class="n">WINAPI</span> <span class="nf">wWinMain</span><span class="p">(</span><span class="n">HINSTANCE</span> <span class="n">hInstance</span><span class="p">,</span> <span class="n">HINSTANCE</span><span class="p">,</span> <span class="n">PWSTR</span> <span class="n">pCmdLine</span><span class="p">,</span> <span class="kt">int</span> <span class="n">nCmdShow</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="c1">// Register the window class.</span>
+    <span class="k">const</span> <span class="kt">wchar_t</span> <span class="n">CLASS_NAME</span><span class="p">[]</span>  <span class="o">=</span> <span class="s">L"Sample Window Class"</span><span class="p">;</span>
+    
+    <span class="n">WNDCLASS</span> <span class="n">wc</span> <span class="o">=</span> <span class="p">{</span> <span class="p">};</span>
+
+    <span class="n">wc</span><span class="p">.</span><span class="n">lpfnWndProc</span>   <span class="o">=</span> <span class="n">WindowProc</span><span class="p">;</span>
+    <span class="n">wc</span><span class="p">.</span><span class="n">hInstance</span>     <span class="o">=</span> <span class="n">hInstance</span><span class="p">;</span>
+    <span class="n">wc</span><span class="p">.</span><span class="n">lpszClassName</span> <span class="o">=</span> <span class="n">CLASS_NAME</span><span class="p">;</span>
+
+    <span class="n">RegisterClass</span><span class="p">(</span><span class="o">&amp;</span><span class="n">wc</span><span class="p">);</span>
+
+    <span class="c1">// Create the window.</span>
+
+    <span class="n">HWND</span> <span class="n">hwnd</span> <span class="o">=</span> <span class="n">CreateWindowEx</span><span class="p">(</span>
+        <span class="mi">0</span><span class="p">,</span>                              <span class="c1">// Optional window styles.</span>
+        <span class="n">CLASS_NAME</span><span class="p">,</span>                     <span class="c1">// Window class</span>
+        <span class="s">L"Learn to Program Windows"</span><span class="p">,</span>    <span class="c1">// Window text</span>
+        <span class="n">WS_OVERLAPPEDWINDOW</span><span class="p">,</span>            <span class="c1">// Window style</span>
+
+        <span class="c1">// Size and position</span>
+        <span class="n">CW_USEDEFAULT</span><span class="p">,</span> <span class="n">CW_USEDEFAULT</span><span class="p">,</span> <span class="n">CW_USEDEFAULT</span><span class="p">,</span> <span class="n">CW_USEDEFAULT</span><span class="p">,</span>
+
+        <span class="nb">NULL</span><span class="p">,</span>       <span class="c1">// Parent window    </span>
+        <span class="nb">NULL</span><span class="p">,</span>       <span class="c1">// Menu</span>
+        <span class="n">hInstance</span><span class="p">,</span>  <span class="c1">// Instance handle</span>
+        <span class="nb">NULL</span>        <span class="c1">// Additional application data</span>
+        <span class="p">);</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">hwnd</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="n">ShowWindow</span><span class="p">(</span><span class="n">hwnd</span><span class="p">,</span> <span class="n">nCmdShow</span><span class="p">);</span>
+
+    <span class="c1">// Run the message loop.</span>
+
+    <span class="n">MSG</span> <span class="n">msg</span> <span class="o">=</span> <span class="p">{</span> <span class="p">};</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">GetMessage</span><span class="p">(</span><span class="o">&amp;</span><span class="n">msg</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+    <span class="p">{</span>
+        <span class="n">TranslateMessage</span><span class="p">(</span><span class="o">&amp;</span><span class="n">msg</span><span class="p">);</span>
+        <span class="n">DispatchMessage</span><span class="p">(</span><span class="o">&amp;</span><span class="n">msg</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">LRESULT</span> <span class="n">CALLBACK</span> <span class="nf">WindowProc</span><span class="p">(</span><span class="n">HWND</span> <span class="n">hwnd</span><span class="p">,</span> <span class="n">UINT</span> <span class="n">uMsg</span><span class="p">,</span> <span class="n">WPARAM</span> <span class="n">wParam</span><span class="p">,</span> <span class="n">LPARAM</span> <span class="n">lParam</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">switch</span> <span class="p">(</span><span class="n">uMsg</span><span class="p">)</span>
+    <span class="p">{</span>
+    <span class="k">case</span> <span class="n">WM_DESTROY</span><span class="p">:</span>
+        <span class="n">PostQuitMessage</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+        <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+
+    <span class="k">case</span> <span class="n">WM_PAINT</span><span class="p">:</span>
+        <span class="p">{</span>
+            <span class="n">PAINTSTRUCT</span> <span class="n">ps</span><span class="p">;</span>
+            <span class="n">HDC</span> <span class="n">hdc</span> <span class="o">=</span> <span class="n">BeginPaint</span><span class="p">(</span><span class="n">hwnd</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">ps</span><span class="p">);</span>
+
+
+
+            <span class="n">FillRect</span><span class="p">(</span><span class="n">hdc</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">ps</span><span class="p">.</span><span class="n">rcPaint</span><span class="p">,</span> <span class="p">(</span><span class="n">HBRUSH</span><span class="p">)</span> <span class="p">(</span><span class="n">COLOR_WINDOW</span><span class="o">+</span><span class="mi">1</span><span class="p">));</span>
+
+            <span class="n">EndPaint</span><span class="p">(</span><span class="n">hwnd</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">ps</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">DefWindowProc</span><span class="p">(</span><span class="n">hwnd</span><span class="p">,</span> <span class="n">uMsg</span><span class="p">,</span> <span class="n">wParam</span><span class="p">,</span> <span class="n">lParam</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p>That is way bigger, but it also showcases a lot of things. It launches a typical rectangular UI window filled with a background color. Now, that may not seem like much but we are operating at (almost) lowest api level for Windows. Only this much code at this level achieves a lot - functional UI, proper keyboard and mouse support and event processing.  Unlike other hello world programs for other platforms, this hello world is the foundation of any Win32 giant codebase out there. They have to implement all of this somewhere in the code. Whether it is Photoshop or Firefox for Windows, they will have this piece of code somewhere in their giant codebases.  <br />
+Now that, it is out of the way, let’s follow this code block by block.</p>
+
+<h2 id="anatomy">Anatomy</h2>
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#ifndef UNICODE
+#define UNICODE
+#endif   
+#include &lt;windows.h&gt;    
+</span></code></pre></div></div>
+<p>Over the years, Windows programming has undergone large changes, like move from 16-bit to 32-bit api in Win95, move to NT kernel with XP and later changes for Vista and Windows 8. Any app whether the one developed in 1995 or in 2008 which calls windows.h must continue to work in the latest version of Windows.  Windows.h and Win32 apis do a lot of heavy duty work to ensure that all these apps remain compatible even when they are all including the same header.  For example, if you are developing a new app which uses a legacy component (from Windows 95 era referring to windows.h header files of that era ),  it is possible that your new component and legacy component will consume the same windows.h (from latest Windows SDK) and yet, pick up the era-appropriate functions.
+It is a catch-all header for most common windows system calls. Windows.h, a small file on its own, carries forward declaration for multiple headers. For this hello world code, the apis are in winuser.h and linked using user32.dll. For any other functionality, some other header might be needed. Windows.h makes it easy by acting as a “router” for all these headers. You only need to include windows.h header and you get all this functionality. As MSDN page mentions, you can carefully select a different or smaller subset of functionality by defining few global identifiers like UNICODE here which indicates to use unicode variant of specific apis, denoted by W. <code class="language-plaintext highlighter-rouge">CreateFoo</code> resolves to <code class="language-plaintext highlighter-rouge">CreateFooW</code> (https://docs.microsoft.com/en-us/windows/win32/winprog/using-the-windows-headers).</p>
+
+<h3 id="main-function">Main function</h3>
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="n">WINAPI</span> <span class="nf">wWinMain</span><span class="p">(</span><span class="n">HINSTANCE</span> <span class="n">hInstance</span><span class="p">,</span> <span class="n">HINSTANCE</span><span class="p">,</span> <span class="n">PWSTR</span> <span class="n">pCmdLine</span><span class="p">,</span> <span class="kt">int</span> <span class="n">nCmdShow</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="c1">// Register the window class.</span>
+    <span class="k">const</span> <span class="kt">wchar_t</span> <span class="n">CLASS_NAME</span><span class="p">[]</span>  <span class="o">=</span> <span class="s">L"Sample Window Class"</span><span class="p">;</span>
+    
+    <span class="n">WNDCLASS</span> <span class="n">wc</span> <span class="o">=</span> <span class="p">{</span> <span class="p">};</span>
+
+    <span class="n">wc</span><span class="p">.</span><span class="n">lpfnWndProc</span>   <span class="o">=</span> <span class="n">WindowProc</span><span class="p">;</span>
+    <span class="n">wc</span><span class="p">.</span><span class="n">hInstance</span>     <span class="o">=</span> <span class="n">hInstance</span><span class="p">;</span>
+    <span class="n">wc</span><span class="p">.</span><span class="n">lpszClassName</span> <span class="o">=</span> <span class="n">CLASS_NAME</span><span class="p">;</span>
+
+    <span class="n">RegisterClass</span><span class="p">(</span><span class="o">&amp;</span><span class="n">wc</span><span class="p">);</span>
+
+    <span class="c1">// Create the window.</span>
+
+    <span class="n">HWND</span> <span class="n">hwnd</span> <span class="o">=</span> <span class="n">CreateWindowEx</span><span class="p">(</span>
+        <span class="mi">0</span><span class="p">,</span>                              <span class="c1">// Optional window styles.</span>
+        <span class="n">CLASS_NAME</span><span class="p">,</span>                     <span class="c1">// Window class</span>
+        <span class="s">L"Learn to Program Windows"</span><span class="p">,</span>    <span class="c1">// Window text</span>
+        <span class="n">WS_OVERLAPPEDWINDOW</span><span class="p">,</span>            <span class="c1">// Window style</span>
+
+        <span class="c1">// Size and position</span>
+        <span class="n">CW_USEDEFAULT</span><span class="p">,</span> <span class="n">CW_USEDEFAULT</span><span class="p">,</span> <span class="n">CW_USEDEFAULT</span><span class="p">,</span> <span class="n">CW_USEDEFAULT</span><span class="p">,</span>
+
+        <span class="nb">NULL</span><span class="p">,</span>       <span class="c1">// Parent window    </span>
+        <span class="nb">NULL</span><span class="p">,</span>       <span class="c1">// Menu</span>
+        <span class="n">hInstance</span><span class="p">,</span>  <span class="c1">// Instance handle</span>
+        <span class="nb">NULL</span>        <span class="c1">// Additional application data</span>
+        <span class="p">);</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">hwnd</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="n">ShowWindow</span><span class="p">(</span><span class="n">hwnd</span><span class="p">,</span> <span class="n">nCmdShow</span><span class="p">);</span>
+
+    <span class="c1">// Run the message loop.</span>
+
+    <span class="n">MSG</span> <span class="n">msg</span> <span class="o">=</span> <span class="p">{</span> <span class="p">};</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">GetMessage</span><span class="p">(</span><span class="o">&amp;</span><span class="n">msg</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+    <span class="p">{</span>
+        <span class="n">TranslateMessage</span><span class="p">(</span><span class="o">&amp;</span><span class="n">msg</span><span class="p">);</span>
+        <span class="n">DispatchMessage</span><span class="p">(</span><span class="o">&amp;</span><span class="n">msg</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p>It is the entry point to the program. On a quick glance, there are a lot of 0s and NULLs passed as arguments in functions. Many of these functions have existed since the inception of Win32 apis and have changed in their behavior. Thus, many of the arguments no longer have any effect and are left for compatibility sake. These arguments are always NULL or 0. For the rest of the arguments, flags can be combined with logical OR |.
+Another interesting artefacts of the past are wParam and lParam parameters. Before Win95, Windows was 16-bit OS. wParam was WORD param which was 16-bit and lparam was LONG param which was 32-bit. With Win95,Windows moved to 32-bit era and both WORD and LONG are now 32-bit so there is no difference between wParam and lParam.  <br />
+HINSTANCE is also another of the interesting artefact. This <a href="https://devblogs.microsoft.com/oldnewthing/20050418-59/?p=35873">blogpost by Raymond Chen</a> does a good job of explaining the reasoning behind it.</p>
+
+<h3 id="window-of-windows---hwnd-pronounced-as-h-wind">Window of Windows - Hwnd (pronounced as h-wind)</h3>
+
+<h4 id="what-is-an-hwnd-">What is an Hwnd ?</h4>
+<p>&lt;pictures of hwnd : &gt;
+<img src="https://docs.microsoft.com/en-us/windows/win32/learnwin32/images/window01.png" alt="picture of a window UI" title="Hwnd" /></p>
+
+<p>“Obviously, windows are central to Windows. They are so important that they named the operating system after them.” - <a href="https://docs.microsoft.com/en-us/windows/win32/learnwin32/what-is-a-window-">Official MSDN quote</a>  <br />
+A window is a rectangular area on the screen that receives user input and displays output in the form of text and graphics. In Win32 programming convention, a window is referenced by HWND - handle to a window. A handle is a numerical value associated with that window. In the kernel, an object is created for every window with an unique id. This id is stored in that window’s handle. For easy understanding, assume hwnd and its window are one and the same thing. If a statement says, change the size of hwnd, that is referring to the window referenced by that hwnd. If a window is a person, hwnd is its name.
+<img src="https://i.imgur.com/zHcxvkF.jpg" alt="The room movie meme about oh hi hwnd" title="I haven't seen this movie nor I am going to. I will be using it for making memes though" /></p>
+
+<h4 id="everything-is-an-hwnd">Everything is an hwnd</h4>
+<p>In a true spirit of the movie Inception (or recursion), every UI element in a typical hwnd is a hwnd itself. This is achieved using child windows/owned windows (more in CreateWindow). This leads to a lot of HWNDs in a moderately complex app.
+<img src="https://docs.microsoft.com/en-us/windows/win32/learnwin32/images/window04.png" alt="parent child relation of hwnd and child hwnds" title="&quot;)
+Frameworks like XAML(WinUI), WPF have found non-HWND ways to create UI elements but it is still pervasive enough. [Spy++](https://docs.microsoft.com/en-us/visualstudio/debugger/introducing-spy-increment?view=vs-2019), bundled with Visual Studio, is a good tool to visualize that.
+![picture of Spy++](https://d2.alternativeto.net/dist/s/e36616b5-49b2-e011-9727-0025902c7e73_2_full.png?format=jpg&amp;width=1600&amp;height=1600&amp;mode=min&amp;upscale=false &quot;hello world code isn't the only thing that hasn't changed in a long time" /></p>
+
+<p>Modern Windows HWNDs are hardware accelerated i.e. take help of graphics pipelines like Direct2D to draw pixels faster, using a GPU. <a href="https://en.wikipedia.org/wiki/Desktop_Window_Manager">Desktop Window Manager (DWM)</a> handles drwaing pixels on modern Windows.</p>
+
+<p>Hwnd registration and window messaging system are the few pieces of code here which are reminiscent of very 80s Object Oriented (OO) design. Microsoft was on-board OO train very early on, even when it was not totally accepted by the industry. It was when Microsoft had been using only C for programming Windows. OO in C requires a lot of weird design choices and because of its great backward compatibility, a lot of it has stayed.</p>
+
+<h4 id="register-the-window-class-with-os">Register the window class with OS</h4>
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Register the window class.</span>
+    <span class="k">const</span> <span class="kt">wchar_t</span> <span class="n">CLASS_NAME</span><span class="p">[]</span>  <span class="o">=</span> <span class="s">L"Sample Window Class"</span><span class="p">;</span>
+    
+    <span class="n">WNDCLASS</span> <span class="n">wc</span> <span class="o">=</span> <span class="p">{</span> <span class="p">};</span>
+
+    <span class="n">wc</span><span class="p">.</span><span class="n">lpfnWndProc</span>   <span class="o">=</span> <span class="n">WindowProc</span><span class="p">;</span>
+    <span class="n">wc</span><span class="p">.</span><span class="n">hInstance</span>     <span class="o">=</span> <span class="n">hInstance</span><span class="p">;</span>
+    <span class="n">wc</span><span class="p">.</span><span class="n">lpszClassName</span> <span class="o">=</span> <span class="n">CLASS_NAME</span><span class="p">;</span>
+
+    <span class="n">RegisterClass</span><span class="p">(</span><span class="o">&amp;</span><span class="n">wc</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>Windows has a weird way of doing inheritance. You will have to register your newly created hwnd object with OS for it to start communicating with it.</p>
+
+<h4 id="create-the-aforementioned-window">Create the aforementioned Window</h4>
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Create the window.</span>
+    <span class="n">HWND</span> <span class="n">hwnd</span> <span class="o">=</span> <span class="n">CreateWindowEx</span><span class="p">(</span>
+        <span class="mi">0</span><span class="p">,</span>                              <span class="c1">// Optional window styles.</span>
+        <span class="n">CLASS_NAME</span><span class="p">,</span>                     <span class="c1">// Window class</span>
+        <span class="s">L"Learn to Program Windows"</span><span class="p">,</span>    <span class="c1">// Window text</span>
+        <span class="n">WS_OVERLAPPEDWINDOW</span><span class="p">,</span>            <span class="c1">// Window style</span>
+
+        <span class="c1">// Size and position</span>
+        <span class="n">CW_USEDEFAULT</span><span class="p">,</span> <span class="n">CW_USEDEFAULT</span><span class="p">,</span> <span class="n">CW_USEDEFAULT</span><span class="p">,</span> <span class="n">CW_USEDEFAULT</span><span class="p">,</span>
+
+        <span class="nb">NULL</span><span class="p">,</span>       <span class="c1">// Parent window    </span>
+        <span class="nb">NULL</span><span class="p">,</span>       <span class="c1">// Menu</span>
+        <span class="n">hInstance</span><span class="p">,</span>  <span class="c1">// Instance handle</span>
+        <span class="nb">NULL</span>        <span class="c1">// Additional application data</span>
+        <span class="p">);</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">hwnd</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="p">}</span>
+</code></pre></div></div>
+<p>This code creates the HWND. We provide the window classes (we just registered) to be associated with this hwnd. Window creation api is very <a href="https://docs.microsoft.com/en-us/windows/win32/apiindex/windows-api-list">rich</a> and can create 100s windows with different configurations and behaviors. One good example is creation of child windows. Since everything is a window. A button within a UI window is a child to that hwnd. That means the parent window can handle processing of messages for that child window. This kind of hierarchy is extremely useful. It is an implementation of inheritance concept from the OO paradigm. In this way, you can add a new window as child window of parent window and you don’t have to write any additional code for its basic operations like resize, maximize, close etc.</p>
+
+<h4 id="show-the-window">Show the window</h4>
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ShowWindow</span><span class="p">(</span><span class="n">hwnd</span><span class="p">,</span> <span class="n">nCmdShow</span><span class="p">);</span>
+</code></pre></div></div>
+<p>Guuess what, it shows the window on the screen. What is the point of explicitly calling show window ? There are many cases where a window is not shown directly. It can be created with the above command and updated using UpdateWindow and when ready, shown to the screen. There is also AnimateWindow for doing 90s PPT slide like transition animations which nobody should use in modern day and age.
+Windows messaging system
+Windows messaging system is event-driven achieved using dynamic polymorphism. The OS communicates to the program by passing messages and it will call a special function in your program to give you an option to deal with those messages. These messages can be keyboard, mouse, touch events generated on interacting with your program, or OS created events like when your program is minimized, maximized or closed. 
+For this message passing model, Windows creates a message queue for a thread which handles all the messages for HWNDs created on that thread.</p>
+
+<h3 id="message-loop">Message loop</h3>
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Run the message loop.</span>
+
+    <span class="n">MSG</span> <span class="n">msg</span> <span class="o">=</span> <span class="p">{</span> <span class="p">};</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">GetMessage</span><span class="p">(</span><span class="o">&amp;</span><span class="n">msg</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+    <span class="p">{</span>
+        <span class="n">TranslateMessage</span><span class="p">(</span><span class="o">&amp;</span><span class="n">msg</span><span class="p">);</span>
+        <span class="n">DispatchMessage</span><span class="p">(</span><span class="o">&amp;</span><span class="n">msg</span><span class="p">);</span>
+    <span class="p">}</span>
+</code></pre></div></div>
+
+<p>Message loop code is what is responsible for filing up this message queue.  There has to be only one message loop per thread. This message queue is hidden and not accessible by your code. It is handled entirely by the OS. All your code can do is to remove the topmost message from this queue using GetMessage() api call. This message is then translated for keyboard input so that it can handle shortcut keys and do other keyboard input processing (https://stackoverflow.com/questions/12581889/why-exactly-translatemessage) and then it is dispatched to the handler function WndProc (discussed below).  GetMessage is a blocking function so it will wait if the loop is empty. But this doesn’t mean your UI will be unresponsive. An alternative to that is PeekMessage function which can peek and tell if there is a message on top of the queue. Since it won’t block, it is good for certain scenarios to do a “Peek” before a “Get”.</p>
+
+<h4 id="wndproc---the-most-important-function-in-your-code">WndProc - the most important function in your code</h4>
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">LRESULT</span> <span class="n">CALLBACK</span> <span class="nf">WindowProc</span><span class="p">(</span><span class="n">HWND</span> <span class="n">hwnd</span><span class="p">,</span> <span class="n">UINT</span> <span class="n">uMsg</span><span class="p">,</span> <span class="n">WPARAM</span> <span class="n">wParam</span><span class="p">,</span> <span class="n">LPARAM</span> <span class="n">lParam</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">switch</span> <span class="p">(</span><span class="n">uMsg</span><span class="p">)</span>
+    <span class="p">{</span>
+    <span class="k">case</span> <span class="n">WM_DESTROY</span><span class="p">:</span>
+        <span class="n">PostQuitMessage</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+        <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+
+    <span class="k">case</span> <span class="n">WM_PAINT</span><span class="p">:</span>
+        <span class="p">{</span>
+            <span class="n">PAINTSTRUCT</span> <span class="n">ps</span><span class="p">;</span>
+            <span class="n">HDC</span> <span class="n">hdc</span> <span class="o">=</span> <span class="n">BeginPaint</span><span class="p">(</span><span class="n">hwnd</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">ps</span><span class="p">);</span>
+
+
+
+            <span class="n">FillRect</span><span class="p">(</span><span class="n">hdc</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">ps</span><span class="p">.</span><span class="n">rcPaint</span><span class="p">,</span> <span class="p">(</span><span class="n">HBRUSH</span><span class="p">)</span> <span class="p">(</span><span class="n">COLOR_WINDOW</span><span class="o">+</span><span class="mi">1</span><span class="p">));</span>
+
+            <span class="n">EndPaint</span><span class="p">(</span><span class="n">hwnd</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">ps</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">DefWindowProc</span><span class="p">(</span><span class="n">hwnd</span><span class="p">,</span> <span class="n">uMsg</span><span class="p">,</span> <span class="n">wParam</span><span class="p">,</span> <span class="n">lParam</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p>WndProc is the special function which has to be present in every Win32 program code, either directly or indirectly.  WndProc is the function which Windows OS calls whenever it has to communicate anything with your running code. 
+WndProc usually has a giant switch statement for handling window messages like WM_DESTROY (what to do when a user clicks on the small x on the top-right of the window). It can choose to ignore it and it won’t close the window. Thankfully, there are other ways to close a window. This shows the level of control and flexibility Windows OS provides to developers which can be beneficial but can also be misused and the recent Windows programming model has evolved to counter that. 
+PostQuitMessage adds a WM_QUIT message to the message queue which causes GetMessage() to false, exiting the loop and exiting the program.
+Your program doesn’t have to handle all the messages. It can handle a few special messages of interest and then call DefWindowProc - OS provided default handler to deal with the rest. WndProc can choose to handle messages for all windows in a thread or it can defer them to respective WndProc to handle.  See Subclassing as example of dynamic polymorphism to achieve that https://docs.microsoft.com/en-us/windows/win32/api/commctrl/nf-commctrl-defsubclassproc</p>
+
+<h4 id="painting-the-window">Painting the window</h4>
+<p>The code within <code class="language-plaintext highlighter-rouge">case WM_PAINT</code>  is the boilerplate code for drawing anything in a window. Windows Graphics Driver Interface (GDI) is immediate mode (link to it). A lot of newer UI libraries like WPF and WinUI are retained mode GUI frameworks because of memory and performance reasons. MSDN’s  Painting the Window - Win32 apps does a very good job of explaining this code.</p>
+
+<h3 id="compilation-on-terminal-without-visual-studio">Compilation on terminal, without Visual Studio</h3>
+<p>With newer msbuild tools unbundled from Visual Studio, one can easily compile them from terminal only, without needing to open Visual Studio. Make sure you have installed Microsoft C++ Build Tools 
+The functions exported by windows.h have their definition in user32.lib and user32.dll. You only need those two for compilation. Every windows OS installation has these and they are included in the system path, so no extra steps needed.</p>
+
+<div class="language-batch highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;</span> <span class="kd">set</span> <span class="kd">cl</span> <span class="o">&amp;</span> <span class="kd">set</span> <span class="kd">link</span>
+<span class="kd">CL</span><span class="o">=</span><span class="na">/EHsc /GR /FI</span><span class="s2">"iso646.h"</span> <span class="na">/Zc</span><span class="nl">:strictStrings</span> <span class="na">/we</span><span class="m">4627</span> <span class="na">/we</span><span class="m">4927</span> <span class="na">/wd</span><span class="m">4351</span> <span class="na">/W</span><span class="m">4</span> <span class="na">/D</span><span class="s2">"_CRT_SECURE_NO_WARNINGS"</span> <span class="na">/nologo
+</span><span class="kd">LINK</span><span class="o">=</span><span class="na">/entry</span><span class="nl">:mainCRTStartup</span> <span class="na">/nologo
+
+</span><span class="o">&gt;</span> <span class="kd">cl</span> <span class="kd">winhello</span>.cpp <span class="na">/Fe</span><span class="s2">"hello"</span> <span class="na">/link /subsystem</span><span class="nl">:windows</span> <span class="kd">user32</span>.lib
+<span class="kd">winhello</span>.cpp
+</code></pre></div></div>
+
+<p>Ending notes
+All the above functions make up for the basics of every Win32 application program written out there whether it is a giant complex program like Photoshop or Firefox.<br />
+Future scope</p>
+
+<p>References
+MSDN
+<a href="https://www.amazon.com/Programming-Windows%C2%AE-Fifth-Developer-Reference/dp/157231995X">Programming Windows by Charles Petzold old edition</a>
+https://stackoverflow.com/questions/20778319/command-line-to-compile-win32-hello-world-in-visual-studio-2005</p>
+
+<p>Programming Windows 1998
+WinRT, WinUI3</p>
+
+
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="http://localhost:4000/2020/04/04/introducing-hyde.html">
+        Introducing Hyde
+      </a>
+    </h1>
+
+    <span class="post-date">04 Apr 2020</span>
+
+    <p>Hyde is a brazen two-column <a href="https://jekyllrb.com">Jekyll</a> theme that pairs a prominent sidebar with uncomplicated content. It’s based on <a href="https://getpoole.com">Poole</a>, the Jekyll butler.</p>
+
+<h3 id="built-on-poole">Built on Poole</h3>
+
+<p>Poole is the Jekyll Butler, serving as an upstanding and effective foundation for Jekyll themes by <a href="https://twitter.com/mdo">@mdo</a>. Poole, and every theme built on it (like Hyde here) includes the following:</p>
+
+<ul>
+  <li>Complete Jekyll setup included (layouts, config, <a href="/404">404</a>, <a href="/atom.xml">RSS feed</a>, posts, and <a href="/about">example page</a>)</li>
+  <li>Mobile friendly design and development</li>
+  <li>Easily scalable text and component sizing with <code class="language-plaintext highlighter-rouge">rem</code> units in the CSS</li>
+  <li>Support for a wide gamut of HTML elements</li>
+  <li>Related posts (time-based, because Jekyll) below each post</li>
+  <li>Syntax highlighting, courtesy Pygments (the Python-based code snippet highlighter)</li>
+</ul>
+
+<h3 id="hyde-features">Hyde features</h3>
+
+<p>In addition to the features of Poole, Hyde adds the following:</p>
+
+<ul>
+  <li>Sidebar includes support for textual modules and a dynamically generated navigation with active link support</li>
+  <li>Two orientations for content and sidebar, default (left sidebar) and <a href="https://github.com/poole/lanyon#reverse-layout">reverse</a> (right sidebar), available via <code class="language-plaintext highlighter-rouge">&lt;body&gt;</code> classes</li>
+  <li><a href="https://github.com/poole/hyde#themes">Eight optional color schemes</a>, available via <code class="language-plaintext highlighter-rouge">&lt;body&gt;</code> classes</li>
+</ul>
+
+<p><a href="https://github.com/poole/hyde#readme">Head to the readme</a> to learn more.</p>
+
+<h3 id="browser-support">Browser support</h3>
+
+<p>Hyde is by preference a forward-thinking project. In addition to the latest versions of Chrome, Safari (mobile and desktop), and Firefox, it is only compatible with Internet Explorer 9 and above.</p>
+
+<h3 id="download">Download</h3>
+
+<p>Hyde is developed on and hosted with GitHub. Head to the <a href="https://github.com/poole/hyde">GitHub repository</a> for downloads, bug reports, and features requests.</p>
+
+<p>Thanks!</p>
+
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="http://localhost:4000/2020/04/02/example-content.html">
+        Example content
+      </a>
+    </h1>
+
+    <span class="post-date">02 Apr 2020</span>
+
+    <div class="message">
+  Howdy! This is an example blog post that shows several types of HTML content supported in this theme.
+</div>
+
+<p>Cum sociis natoque penatibus et magnis <a href="#">dis parturient montes</a>, nascetur ridiculus mus. <em>Aenean eu leo quam.</em> Pellentesque ornare sem lacinia quam venenatis vestibulum. Sed posuere consectetur est at lobortis. Cras mattis consectetur purus sit amet fermentum.</p>
+
+<blockquote>
+  <p>Curabitur blandit tempus porttitor. Nullam quis risus eget urna mollis ornare vel eu leo. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+</blockquote>
+
+<p>Etiam porta <strong>sem malesuada magna</strong> mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.</p>
+
+<h2 id="inline-html-elements">Inline HTML elements</h2>
+
+<p>HTML defines a long list of available inline tags, a complete list of which can be found on the <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element">Mozilla Developer Network</a>.</p>
+
+<ul>
+  <li><strong>To bold text</strong>, use <code class="language-plaintext highlighter-rouge">&lt;strong&gt;</code>.</li>
+  <li><em>To italicize text</em>, use <code class="language-plaintext highlighter-rouge">&lt;em&gt;</code>.</li>
+  <li>Abbreviations, like <abbr title="HyperText Markup Langage">HTML</abbr> should use <code class="language-plaintext highlighter-rouge">&lt;abbr&gt;</code>, with an optional <code class="language-plaintext highlighter-rouge">title</code> attribute for the full phrase.</li>
+  <li>Citations, like <cite>— Mark otto</cite>, should use <code class="language-plaintext highlighter-rouge">&lt;cite&gt;</code>.</li>
+  <li><del>Deleted</del> text should use <code class="language-plaintext highlighter-rouge">&lt;del&gt;</code> and <ins>inserted</ins> text should use <code class="language-plaintext highlighter-rouge">&lt;ins&gt;</code>.</li>
+  <li>Superscript <sup>text</sup> uses <code class="language-plaintext highlighter-rouge">&lt;sup&gt;</code> and subscript <sub>text</sub> uses <code class="language-plaintext highlighter-rouge">&lt;sub&gt;</code>.</li>
+</ul>
+
+<p>Most of these elements are styled by browsers with few modifications on our part.</p>
+
+<h2 id="heading">Heading</h2>
+
+<p>Vivamus sagittis lacus vel augue rutrum faucibus dolor auctor. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
+
+<h3 id="code">Code</h3>
+
+<p>Cum sociis natoque penatibus et magnis dis <code class="language-plaintext highlighter-rouge">code element</code> montes, nascetur ridiculus mus.</p>
+
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">// Example can be run directly in your JavaScript console</span>
+
+<span class="c1">// Create a function that takes two arguments and returns the sum of those arguments</span>
+<span class="kd">var</span> <span class="nx">adder</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Function</span><span class="p">(</span><span class="dl">"</span><span class="s2">a</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">b</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">return a + b</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="c1">// Call the function</span>
+<span class="nx">adder</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">6</span><span class="p">);</span>
+<span class="c1">// &gt; 8</span></code></pre></figure>
+
+<p>Aenean lacinia bibendum nulla sed consectetur. Etiam porta sem malesuada magna mollis euismod. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa.</p>
+
+<h3 id="gists-via-github-pages">Gists via GitHub Pages</h3>
+
+<p>Vestibulum id ligula porta felis euismod semper. Nullam quis risus eget urna mollis ornare vel eu leo. Donec sed odio dui.</p>
+
+<noscript><pre>400: Invalid request</pre></noscript>
+<script src="https://gist.github.com/5555251.js?file=gist.md"> </script>
+
+<p>Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Nullam quis risus eget urna mollis ornare vel eu leo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec sed odio dui. Vestibulum id ligula porta felis euismod semper.</p>
+
+<h3 id="lists">Lists</h3>
+
+<p>Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Aenean lacinia bibendum nulla sed consectetur. Etiam porta sem malesuada magna mollis euismod. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+
+<ul>
+  <li>Praesent commodo cursus magna, vel scelerisque nisl consectetur et.</li>
+  <li>Donec id elit non mi porta gravida at eget metus.</li>
+  <li>Nulla vitae elit libero, a pharetra augue.</li>
+</ul>
+
+<p>Donec ullamcorper nulla non metus auctor fringilla. Nulla vitae elit libero, a pharetra augue.</p>
+
+<ol>
+  <li>Vestibulum id ligula porta felis euismod semper.</li>
+  <li>Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</li>
+  <li>Maecenas sed diam eget risus varius blandit sit amet non magna.</li>
+</ol>
+
+<p>Cras mattis consectetur purus sit amet fermentum. Sed posuere consectetur est at lobortis.</p>
+
+<dl>
+  <dt>HyperText Markup Language (HTML)</dt>
+  <dd>The language used to describe and define the content of a Web page</dd>
+
+  <dt>Cascading Style Sheets (CSS)</dt>
+  <dd>Used to describe the appearance of Web content</dd>
+
+  <dt>JavaScript (JS)</dt>
+  <dd>The programming language used to build advanced Web sites and applications</dd>
+</dl>
+
+<p>Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Nullam quis risus eget urna mollis ornare vel eu leo.</p>
+
+<h3 id="images">Images</h3>
+
+<p>Quisque consequat sapien eget quam rhoncus, sit amet laoreet diam tempus. Aliquam aliquam metus erat, a pulvinar turpis suscipit at.</p>
+
+<p><img src="http://placehold.it/800x400" alt="placeholder" title="Large example image" />
+<img src="http://placehold.it/400x200" alt="placeholder" title="Medium example image" />
+<img src="http://placehold.it/200x200" alt="placeholder" title="Small example image" /></p>
+
+<h3 id="tables">Tables</h3>
+
+<p>Aenean lacinia bibendum nulla sed consectetur. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Upvotes</th>
+      <th>Downvotes</th>
+    </tr>
+  </thead>
+  <tfoot>
+    <tr>
+      <td>Totals</td>
+      <td>21</td>
+      <td>23</td>
+    </tr>
+  </tfoot>
+  <tbody>
+    <tr>
+      <td>Alice</td>
+      <td>10</td>
+      <td>11</td>
+    </tr>
+    <tr>
+      <td>Bob</td>
+      <td>4</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <td>Charlie</td>
+      <td>7</td>
+      <td>9</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Nullam id dolor id nibh ultricies vehicula ut id elit. Sed posuere consectetur est at lobortis. Nullam quis risus eget urna mollis ornare vel eu leo.</p>
+
+<hr />
+
+<p>Want to see something else added? <a href="https://github.com/poole/poole/issues/new">Open an issue.</a></p>
+
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="http://localhost:4000/2020/04/01/whats-jekyll.html">
+        What's Jekyll?
+      </a>
+    </h1>
+
+    <span class="post-date">01 Apr 2020</span>
+
+    <p><a href="https://jekyllrb.com">Jekyll</a> is a static site generator, an open-source tool for creating simple yet powerful websites of all shapes and sizes. From <a href="https://github.com/mojombo/jekyll/blob/master/README.markdown">the project’s readme</a>:</p>
+
+<blockquote>
+  <p>Jekyll is a simple, blog aware, static site generator. It takes a template directory […] and spits out a complete, static website suitable for serving with Apache or your favorite web server. This is also the engine behind GitHub Pages, which you can use to host your project’s page or blog right here from GitHub.</p>
+</blockquote>
+
+<p>It’s an immensely useful tool and one we encourage you to use here with Hyde.</p>
+
+<p>Find out more by <a href="https://github.com/mojombo/jekyll">visiting the project on GitHub</a>.</p>
+
+  </div>
+  
+</div>
+
+<div class="pagination">
+  
+    <span class="pagination-item older">Older</span>
+  
+  
+    <span class="pagination-item newer">Newer</span>
+  
+</div>
+
+    </div>
+
+  </body>
 </html>
