@@ -306,7 +306,7 @@ Can be compiled using any version of Visual Studio. With newer msbuild tools unb
 
 
 # Ending notes
-Thank you for reaching this far. The idea of this post came while I started learning Win32 apis for my work. MSDN does a good job of explaining the api but outside of that, a very little number of articles and blogs exist. This article aims to correct that. 
+Thank you for reaching this far. The idea of this post came while I started learning Win32 apis for my work. MSDN does a good job of explaining the api but outside of that, a very little number of articles and blogs exist. This article aims to improve on that. \
 If you find any gaps or mistakes, let me know on twitter. 
 
 
