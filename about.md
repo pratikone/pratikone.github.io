@@ -4,26 +4,18 @@ title: About
 ---
 
 <p class="message">
-  Hey there! This page is included as an example. Feel free to customize it for your own use upon downloading. Carry on!
+  Namaskar ! I am Pratik Anand - I work as a software engineer in the industry. These days I am very interested in modern C++ language, graphics technologies like UI framework and game engines and webassembly. I also like to draw 2D and 3D art.
 </p>
+Here are some of my art for showcase.
 
-In the novel, *The Strange Case of Dr. Jeykll and Mr. Hyde*, Mr. Poole is Dr. Jekyll's virtuous and loyal butler. Similarly, Poole is an upstanding and effective butler that helps you build Jekyll themes. It's made by [@mdo](https://twitter.com/mdo).
+![King kai](/public/images/kingkaidbz.png)
 
-There are currently two themes built on Poole:
 
-* [Hyde](https://hyde.getpoole.com)
-* [Lanyon](https://lanyon.getpoole.com)
+![Obelix](/public/images/Obelix.png)
 
-Learn more and contribute on [GitHub](https://github.com/poole).
+![Roti](/public/images/roti.png)
 
-## Setup
+![HMT watch](/public/images/hmt.png)
 
-Some fun facts about the setup of this project include:
-
-* Built for [Jekyll](https://jekyllrb.com)
-* Developed on GitHub and hosted for free on [GitHub Pages](https://pages.github.com)
-* Coded with [Atom](https://atom.io)
-
-Have questions or suggestions? Feel free to [open an issue on GitHub](https://github.com/poole/issues/new) or [ask me on Twitter](https://twitter.com/mdo).
-
+![Hajmola](/public/images/hajmola.png)
 Thanks for reading!
