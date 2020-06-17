@@ -1,7 +1,7 @@
 # Setup
 title:            Pratik Anand
 tagline:          'coding तरकारी'
-description:      'Coding <a href="https://en.wikipedia.org/wiki/Tarkari" target="_blank">तरकारी</a> is my space to put random assortment of tech posts. Follow me at <a href="https://twitter.com/pratikone" target="_blank">@pratikone</a>.'
+description:      'Coding Tarkari (<a href="https://en.wikipedia.org/wiki/Tarkari" target="_blank">तरकारी</a>) is my space to put random assortment of tech posts. Follow me at <a href="https://twitter.com/pratikone" target="_blank">@pratikone</a>.'
 url:              https://pratikone.github.io
 baseurl:          ""
 paginate:         1
