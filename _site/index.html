@@ -38,6 +38,7 @@
 
     <nav class="sidebar-nav">
       <a class="sidebar-nav-item active" href="http://localhost:4000">Home</a>
+      <a class="sidebar-nav-item" href="https://github.com/pratikone">Github</a>
       <a class="sidebar-nav-item" href="https://twitter.com/pratikone">Twitter</a>
       <a class="sidebar-nav-item" href="https://www.linkedin.com/in/pratikone/">LinkedIn</a>
 
@@ -48,6 +49,12 @@
         
           
             <a class="sidebar-nav-item" href="http://localhost:4000/about.html">About</a>
+          
+        
+      
+        
+          
+            <a class="sidebar-nav-item" href="http://localhost:4000/archive.html">Archives</a>
           
         
       
@@ -269,7 +276,7 @@ Frameworks like XAML(WinUI), WPF have found non-HWND ways to create UI elements 
 
 <p>Modern Windows HWNDs are hardware accelerated i.e. take help of graphics pipelines like Direct2D to draw pixels faster, using a GPU. <a href="https://en.wikipedia.org/wiki/Desktop_Window_Manager">Desktop Window Manager (DWM)</a> handles drawing pixels on modern Windows.</p>
 
-<p>Hwnd registration and window messaging system are the few pieces of code here which are reminiscent of very 80s Object Oriented (OO) design. Microsoft was on-board OO train very early on, even when it was not totally accepted by the industry. It was when Microsoft had been using only C for programming Windows. OO in C requires a lot of weird design choices and because of its great backward compatibility, a lot of it has stayed.</p>
+<p>Hwnd registration and window messaging system are the few pieces of code here which are reminiscent of very 80s Object Oriented (OO) design. Microsoft was on-board OO train very early on, even when it was not totally accepted by the industry. It was when Microsoft had been using only C for programming Windows. OO in C required a lot of weird design choices in Windows and because of backward compatibility, a lot of that design has stayed to this day.</p>
 
 <h3 id="register-the-window-class-with-os">Register the window class with OS</h3>
 <div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Register the window class.</span>
@@ -330,7 +337,7 @@ For this message passing model, Windows creates a single message queue for a thr
     <span class="p">}</span>
 </code></pre></div></div>
 
-<p>Message loop code is what is responsible for filing up this message queue.  There has to be only one message loop per thread. This message queue is hidden and not accessible by your code. It is handled entirely by the OS. All your code can do is to remove the topmost message from this queue using GetMessage() api call. This message is then translated for keyboard input so that it can handle shortcut keys and do other keyboard input processing (https://stackoverflow.com/questions/12581889/why-exactly-translatemessage) and then it is dispatched to the handler function WndProc (discussed below).  GetMessage is a blocking function so it will wait if the loop is empty. But this doesn’t mean your UI will be unresponsive. An alternative to that is PeekMessage function which can peek and tell if there is a message on top of the queue. Since it won’t block, it is good for certain scenarios to do a “Peek” before a “Get”.</p>
+<p>Message loop code is what is responsible for filing up this message queue.  There has to be only one message loop per thread. This message queue is hidden and not accessible by your code. It is handled entirely by the OS. All your code can do is to remove the topmost message from this queue using <code class="language-plaintext highlighter-rouge">GetMessage()</code> api call. This message is then translated for keyboard input so that it can handle shortcut keys and do other keyboard input processing (<a href="https://stackoverflow.com/questions/12581889/why-exactly-translatemessage">Read more here on TranslateMessage</a>). After that, it is dispatched to the handler function WndProc (discussed below).  <code class="language-plaintext highlighter-rouge">GetMessage</code> is a blocking function so it will wait if the loop is empty. But this doesn’t mean your UI will be unresponsive. An alternative to that is <code class="language-plaintext highlighter-rouge">PeekMessage</code> function which can peek and tell if there is a message on top of the queue. Since it won’t block, it is good for certain scenarios to do a <em>“Peek”</em> before a <em>“Get”</em>.</p>
 
 <h3 id="wndproc---the-most-important-function-in-your-code">WndProc - the most important function in your code</h3>
 <div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">LRESULT</span> <span class="n">CALLBACK</span> <span class="nf">WindowProc</span><span class="p">(</span><span class="n">HWND</span> <span class="n">hwnd</span><span class="p">,</span> <span class="n">UINT</span> <span class="n">uMsg</span><span class="p">,</span> <span class="n">WPARAM</span> <span class="n">wParam</span><span class="p">,</span> <span class="n">LPARAM</span> <span class="n">lParam</span><span class="p">)</span>
@@ -358,16 +365,16 @@ For this message passing model, Windows creates a single message queue for a thr
     <span class="k">return</span> <span class="n">DefWindowProc</span><span class="p">(</span><span class="n">hwnd</span><span class="p">,</span> <span class="n">uMsg</span><span class="p">,</span> <span class="n">wParam</span><span class="p">,</span> <span class="n">lParam</span><span class="p">);</span>
 <span class="p">}</span>
 </code></pre></div></div>
-<p>WndProc is the special function which has to be present in every Win32 program code, either directly or indirectly.  WndProc is the function which Windows OS calls whenever it has to communicate anything with your running code. 
-WndProc usually has a giant switch statement for handling window messages like WM_DESTROY (what to do when a user clicks on the small x on the top-right of the window). It can choose to ignore it and it won’t close the window. Thankfully, there are other ways to close a window. This shows the level of control and flexibility Windows OS provides to developers which can be beneficial but can also be misused and the recent Windows programming model has evolved to counter that. 
-PostQuitMessage adds a WM_QUIT message to the message queue which causes GetMessage() to false, exiting the loop and exiting the program.
-Your program doesn’t have to handle all the messages. It can handle a few special messages of interest and then call DefWindowProc - OS provided default handler to deal with the rest. WndProc can choose to handle messages for all windows in a thread or it can defer them to respective WndProc to handle.  See <a href="https://docs.microsoft.com/en-us/windows/win32/api/commctrl/nf-commctrl-defsubclassproc">Subclassing</a> as example of dynamic polymorphism to achieve that.</p>
+<p><code class="language-plaintext highlighter-rouge">WndProc</code> is the special function which has to be present in every Win32 program code, either directly or indirectly.  It is the function which Windows OS calls whenever it has to communicate anything with your running code. 
+It usually has a giant switch statement for handling window messages like <code class="language-plaintext highlighter-rouge">WM_DESTROY</code> (what to do when a user clicks on the small x on the top-right of the window). It can choose to ignore it and it won’t close the window. Thankfully, there are other ways to close a window. This shows the level of control and flexibility Windows OS provides to developers which can be beneficial but can also be misused and the recent Windows programming model has evolved to counter that. 
+PostQuitMessage adds a <code class="language-plaintext highlighter-rouge">WM_QUIT</code> message to the message queue which causes <code class="language-plaintext highlighter-rouge">GetMessage()</code> to false, exiting the loop and exiting the program.
+Your program doesn’t have to handle all the messages. It can handle a few special messages of interest and then call <code class="language-plaintext highlighter-rouge">DefWindowProc</code> - OS provided default handler to deal with the rest. <code class="language-plaintext highlighter-rouge">WndProc</code> can choose to handle messages for all windows in a thread or it can defer them to respective WndProc to handle.  See <a href="https://docs.microsoft.com/en-us/windows/win32/api/commctrl/nf-commctrl-defsubclassproc">Subclassing</a> as example of dynamic polymorphism to achieve that.</p>
 
 <h3 id="painting-the-window">Painting the window</h3>
 <p>The code within <code class="language-plaintext highlighter-rouge">case WM_PAINT</code>  is the boilerplate code for drawing anything in a window. Windows Graphics Driver Interface (GDI) is immediate mode (link to it). A lot of newer UI libraries like WPF and WinUI are retained mode GUI frameworks because of memory and performance reasons. MSDN’s  Painting the Window - Win32 apps does a very good job of explaining this code.</p>
 
 <h2 id="compilation">Compilation</h2>
-<p>Can be compiled using any version of Visual Studio. With newer msbuild tools unbundled from Visual Studio, one can easily compile them from terminal only.</p>
+<p>MSVC is the compiler of choice. It can be compiled with Visual Studio or in terminal using msbuild. It needs kernel32.dll, user32.dll, gdi32.dll and /SUBSYSTEM:WINDOWS. Yes, the concept of subsystem has existed since start of Windows NT (because Windows was supposed to run OS/2 as subsystem which didn’t happen). That was helpful when Windows introduced Windows Subsystem for Linux (<a href="https://en.wikipedia.org/wiki/Windows_Subsystem_for_Linux">WSL</a>) 30+ years later.</p>
 
 <h1 id="ending-notes">Ending notes</h1>
 <p>Thank you for reaching this far. The idea of this post came while I started learning Win32 apis for my work. MSDN does a good job of explaining the api but outside of that, a very little number of articles and blogs exist. This article aims to improve on that.  <br />
