@@ -16,13 +16,14 @@ C has a runtime, albeit a tiny one and C++ also has a runtime. We don’t notice
 
 ## What is C runtime ? 
 Whenever we refer to C runtime, we usually mean one or both of these things:
-1. Bootstrap and Runtime environment  : It sets up the necessary bootstrapping code which tells the OS how to run this binary code, followed by code for setting up the runtime environment for executing user code. It is included as inline assembly in the compiled binary itself. 
-2. Runtime library which contains functions to interact with the OS. Functions to allocate memory, read and write to files, network etc.
+1. *Bootstrap and Runtime environment*  : It sets up the necessary bootstrapping code which tells the OS how to run this binary code, followed by code for setting up the runtime environment for executing user code. It is included as inline assembly in the compiled binary itself. 
+2. *Runtime library* : it contains functions to interact with the OS; functions to allocate memory, read and write to files, network etc.
 
-## Let’s cook a binary with C runtime
 
-## Bootstrap and C runtime environment
-As the name suggests, this is the code which sets up the execution point for the program for the OS to call. It defines the structure of functions, setup call stack and its calling convention (_stdcall, __cdecl ). This is the most important and necessary code to run our program in the OS.  It is specific to the OS version and doesn’t usually change but gets updated by the OS itself during its update. (Please wait while Windows is updating ...)
+### Bootstrap and C runtime environment
+As the name suggests, this is the code which sets up the execution point for the program for the OS to call. It defines the structure of functions, setup call stack and its calling convention (_stdcall, __cdecl ). This is the most important and necessary code to run our program in the OS.  It is specific to the OS version and doesn’t usually change but gets updated by the OS itself during its update. Those dozens of Windows update we receive, some of them update the CRT too.    
+
+![winupdate](https://www.howtogeek.com/wp-content/uploads/2018/06/img_5b2d86d471d92.png "Please wait while Windows is updating ..."){: height="auto" width="20%"}
 
 
 
@@ -30,7 +31,7 @@ As the name suggests, this is the code which sets up the execution point for the
 In case of C++, `crt1` can be linked alternatively,  which provides some extra functionality for constructor and destructors.
 
 
-## C runtime library
+### C runtime library
 The runtime library or standard library (`stdlib`) contains a series of useful functions like `malloc`, `free`, `printf`, `memcpy` (MSDN reference) for interacting with the OS which almost every program needs. This part can be statically or dynamically linked. Windows provides libcmt.lib for C and libcpmt.lib for C++. 
 If one chooses to link it statically, only the code called by the user's program gets added to its binary, increasing the size. Removing stdlib can significantly reduce the binary size, which could be as significant as 90% in tiny programs  (Link to blog with CRT experiments). 
 If one dynamically links to CRT, this size bump is not there (it is standard for programs to dynamically link to this library for multiple reasons like compatibility with other dll, apart from small size saving). Every OS provides an implementation. `UCRT.dll` on windows and `libc.so` (GLibc) on Linux. 
