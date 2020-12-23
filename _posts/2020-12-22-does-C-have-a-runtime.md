@@ -5,6 +5,11 @@ date:   2020-06-07 14:29:37 -0700
 categories: c
 ---
 
+
+
+
+![bubble](/public/images/speech_bubble1.png "Image source : https://pixabay.com/illustrations/speech-bubble-thinking-talk-5775045/"){: height="36px" width="36px"};
+
 Java has a runtime. We have seen countless times to install or update JRE - Java Runtime environment. Python too has runtime. It is provided by the python executable. But what about C ? Does it have a runtime ? I have never come across a C runtime installer. How about C++ ?  
 The short answer is **YES**.   
 C has a runtime, albeit a tiny one and C++ also has a runtime. We don’t notice it because it is usually provided by the OS itself and with every new OS update, it gets updated. There is a small exception with that (VC runtime library on Windows) but we will talk about it later. Let’s get to the basics.
@@ -20,7 +25,6 @@ Whenever we refer to C runtime, we usually mean one or both of these things:
 As the name suggests, this is the code which sets up the execution point for the program for the OS to call. It defines the structure of functions, setup call stack and its calling convention (_stdcall, __cdecl ). This is the most important and necessary code to run our program in the OS.  It is specific to the OS version and doesn’t usually change but gets updated by the OS itself during its update. (Please wait while Windows is updating ...)
 
 
-# <image>
 
 `crt0` is a special file which gets linked to every program during the linking phase of compilation. It has basic program loading routines which instruct the compiler on how to call this program’s `main()` function and even exit the running program. Like everything else in the C and C++ ecosystem, there is a flexibility of choice on including it. If one wants to write his/her own startup code, they can avoid linking to crt0 altogether (command : nostartfiles  in GCC) and just provide their code in `_start` label in assembly. 
 In case of C++, `crt1` can be linked alternatively,  which provides some extra functionality for constructor and destructors.
