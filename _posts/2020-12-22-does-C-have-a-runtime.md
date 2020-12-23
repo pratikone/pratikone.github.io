@@ -8,7 +8,7 @@ categories: c
 
 
 
-![bubble](/public/images/speech_bubble1.png "Image source : https://pixabay.com/illustrations/speech-bubble-thinking-talk-5775045/"){: height="auto" width="30%" display="block" margin="auto"}
+![bubble](/public/images/speech_bubble1.png "Image source : https://pixabay.com/illustrations/speech-bubble-thinking-talk-5775045/"){: height="auto" width="30%"}
 
 Java has a runtime. We have seen countless times to install or update JRE - Java Runtime environment. Python too has runtime. It is provided by the python executable. But what about C ? Does it have a runtime ? I have never come across a C runtime installer. How about C++ ?  
 The short answer is **YES**.   
