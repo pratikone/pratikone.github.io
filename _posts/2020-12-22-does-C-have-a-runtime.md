@@ -23,7 +23,7 @@ Whenever we refer to C runtime, we usually mean one or both of these things:
 ### Bootstrap and C runtime environment
 As the name suggests, this is the code which sets up the execution point for the program for the OS to call. It defines the structure of functions, setup call stack and its calling convention (_stdcall, __cdecl ). This is the most important and necessary code to run our program in the OS.  It is specific to the OS version and doesn’t usually change but gets updated by the OS itself during its update. Those dozens of Windows update we receive, some of them update the CRT too.    
 
-![winupdate](https://www.howtogeek.com/wp-content/uploads/2018/06/img_5b2d86d471d92.png "Please wait while Windows is updating ..."){: height="auto" width="20%"}
+![winupdate](https://www.howtogeek.com/wp-content/uploads/2018/06/img_5b2d86d471d92.png "Please wait while Windows is updating ..."){: height="auto" width="50%"}
 
 
 
