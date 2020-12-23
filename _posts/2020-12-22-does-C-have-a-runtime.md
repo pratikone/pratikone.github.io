@@ -39,10 +39,10 @@ C runtime is an interesting piece of software - it depends not only on OS and ar
 If you want to port C to a brand new OS,  all you need apart from the compiler is a working C runtime and that’s it, C can be ported.
 
 ## References
-https://stackoverflow.com/questions/2709998/crt0-o-and-crt1-o-whats-the-difference
+[https://stackoverflow.com/questions/2709998/crt0-o-and-crt1-o-whats-the-difference](https://stackoverflow.com/questions/2709998/crt0-o-and-crt1-o-whats-the-difference)
 
-http://www.vishalchovatiya.com/crt-run-time-before-starting-main
+[http://www.vishalchovatiya.com/crt-run-time-before-starting-main](http://www.vishalchovatiya.com/crt-run-time-before-starting-main)
 
-https://blogs.oracle.com/linux/hello-from-a-libc-free-world-part-1-v2
+[https://blogs.oracle.com/linux/hello-from-a-libc-free-world-part-1-v2](https://blogs.oracle.com/linux/hello-from-a-libc-free-world-part-1-v2)
 
-https://docs.microsoft.com/en-us/cpp/c-runtime-library/c-run-time-library-reference?view=msvc-160
+[https://docs.microsoft.com/en-us/cpp/c-runtime-library/c-run-time-library-reference?view=msvc-160](https://docs.microsoft.com/en-us/cpp/c-runtime-library/c-run-time-library-reference?view=msvc-160)
