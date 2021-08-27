@@ -64,10 +64,16 @@
           
         
       
+        
+      
+        
+          
+        
+      
 
     </nav>
 
-    <p>&copy; 2020. All rights reserved.</p>
+    <p>&copy; 2021. All rights reserved.</p>
   </div>
 </div>
 
@@ -77,314 +83,63 @@
   
   <div class="post">
     <h1 class="post-title">
-      <a href="http://localhost:4000/c++/2020/06/07/anatomy-of-windows-hello-world.html">
-        Anatomy of Windows Hello World program
+      <a href="http://localhost:4000/c/2020/06/07/does-C-have-a-runtime.html">
+        Does C have a runtime ?
       </a>
     </h1>
 
     <span class="post-date">07 Jun 2020</span>
 
-    <p>Windows programming is in state of constant change since the introduction of Win32 api - whether it is move to .NET, again to WPF, introduction of Modern Apps which then got changed to UWP and now finally <a href="https://github.com/microsoft/ProjectReunion">Project Reunion</a>. One thing that hasn’t changed at all in this is how to write a hello world program in Windows. It has remained the same since 1995 when Windows 95 was released. However, a lot has changed internally. Windows does a lot of work under the hood to make sure the simple hello world continues to work even after 25 years and large scale OS changes. This blog attempts to go deeper into the hello world to showcase the rich technical background of windows hello world with a bit of history.  <br />
-<img src="https://1000logos.net/wp-content/uploads/2019/08/Windows-Logo-history.jpg" alt="logos of all Windows versions" title="All windows versions" /></p>
-<h1 id="why-modern-windows-api-are-still-called-win32-">Why modern windows api are still called Win32 ?</h1>
-<p><a href="https://en.wikipedia.org/wiki/Windows_API">Win32 api</a> are the system level api for programming Windows at the lowest level. When Windows transitioned to 32-bits system with Windows 95, they wanted a way to distinguish these new 32-bit apis from existing windows api which were 16-bit only. That’s how the name Win32 was chosen for these new apis. Windows 95 was a mega hit and the lot of developers started using those apis to develop for Windows. More those api became popular, it became harder and harder to rename them. Changing to Win64 for 64-bit Windows or just Windows Api would have caused a whole lot more confusion and change of documents to remove 32 from the name. <em>The name Win32 got stuck.</em> Every <a href="https://en.wikipedia.org/wiki/Windows_API">Windows api</a> is now Win32, whether it is 32-bit, 64-bit or any future foo-quantum-bit.</p>
+    <p><img src="/public/images/speech_bubble1.png" alt="bubble" title="Image source : https://pixabay.com/illustrations/speech-bubble-thinking-talk-5775045/" height="auto" width="30%" /></p>
 
-<h1 id="hello-world">Hello World</h1>
-<p>The hello world code for Win32 has largely unchanged since its inception except when the <a href="http://www.charlespetzold.com/blog/2014/12/The-Infamous-Windows-Hello-World-Program.html">infamous 3 pages long hello world program</a> got replaced with a shorter version because it was intimidating to beginners. This anatomy is not of that infamous code but the successor since Win95 days which is decent sized and captures a lot of Windows functionality in itself. Let’s start by comparing this hello world with its console counterpart.</p>
+<p>Java has a runtime. We have seen countless times to install or update JRE - Java Runtime environment. Python too has runtime. It is provided by the python executable. But what about C ? Does it have a runtime ? I have never come across a C runtime installer. How about C++ ?<br />
+The short answer is <strong>YES</strong>. <br />
+C has a runtime, albeit a tiny one and C++ also has a runtime. We don’t notice it because it is usually provided by the OS itself and with every new OS update, it gets updated. There is a small exception with that (VC runtime library on Windows) but we will talk about it later. Let’s get to the basics.</p>
 
-<h2 id="console-hello-world">Console hello world</h2>
+<h2 id="what-is-c-runtime-crt-">What is C runtime (CRT) ?</h2>
+<p>Whenever we refer to C runtime, we usually mean one or both of these things:</p>
+<ol>
+  <li><em>Bootstrap and Runtime environment</em>  : It sets up the necessary bootstrapping code which tells the OS how to run this binary code, followed by code for setting up the runtime environment for executing user code. It is included as inline assembly in the compiled binary itself.</li>
+  <li><em>Runtime library</em> : it contains functions to interact with the OS; functions to allocate memory, read and write to files, network etc.</li>
+</ol>
 
-<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;iostream&gt;
-</span>
-<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
-<span class="p">{</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Hello World!</span><span class="se">\n</span><span class="s">"</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></div></div>
+<h3 id="bootstrap-and-c-runtime-environment">Bootstrap and C runtime environment</h3>
+<p>As the name suggests, this is the code which sets up the execution point for the program for the OS to call. It defines the structure of functions, setup call stack and its calling convention (_stdcall, __cdecl ). This is the most important and necessary code to run our program in the OS.  It is specific to the OS version and doesn’t usually change but gets updated by the OS itself during its update. Among those dozens of Windows update we receive regularly, some of them update the CRT too.</p>
 
-<p>That is pretty straight-forward. You have the IO header, entry point is main() and it calls cout in std namespace which prints hello world. Compare it to Win32 hello world. This code is directly from official <a href="https://docs.microsoft.com/en-us/windows/win32/learnwin32/windows-hello-world-sample">MSDN Win32 hello world</a> tutorial series presented unchanged.</p>
+<p><img src="https://www.howtogeek.com/wp-content/uploads/2018/06/img_5b2d86d471d92.png" alt="winupdate" title="Please wait while Windows is updating ..." height="auto" width="50%" /></p>
 
-<h2 id="windows-hello-world">Windows hello world</h2>
+<p><a href="https://en.wikipedia.org/wiki/Crt0"><code class="language-plaintext highlighter-rouge">crt0</code></a> is a special file which gets linked to every program during the linking phase of compilation. It has basic program loading routines which instruct the compiler on how to call this program’s <code class="language-plaintext highlighter-rouge">main()</code> function and even exit the running program. Like everything else in the C and C++ ecosystem, there is a flexibility of choice on including it. If one wants to write his/her own startup code, they can avoid linking to crt0 altogether (<a href="https://gcc.gnu.org/onlinedocs/gcc/Link-Options.html">nostartfiles</a> in GCC) and just provide their code in <code class="language-plaintext highlighter-rouge">_start</code> label in assembly (<a href="https://stackoverflow.com/questions/29694564/what-is-the-use-of-start-in-c"><code class="language-plaintext highlighter-rouge">_start</code> calls <code class="language-plaintext highlighter-rouge">main()</code> of user code</a>). 
+In case of C++, <code class="language-plaintext highlighter-rouge">crt1</code> can be linked alternatively,  which provides some extra functionality for constructor and destructors.</p>
 
-<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#ifndef UNICODE
-#define UNICODE
-#endif
-</span>
-<span class="cp">#include &lt;windows.h&gt;
-</span>
-<span class="n">LRESULT</span> <span class="n">CALLBACK</span> <span class="nf">WindowProc</span><span class="p">(</span><span class="n">HWND</span> <span class="n">hwnd</span><span class="p">,</span> <span class="n">UINT</span> <span class="n">uMsg</span><span class="p">,</span> <span class="n">WPARAM</span> <span class="n">wParam</span><span class="p">,</span> <span class="n">LPARAM</span> <span class="n">lParam</span><span class="p">);</span>
+<h3 id="c-runtime-library">C runtime library</h3>
+<p>The runtime library or standard library (<code class="language-plaintext highlighter-rouge">stdlib</code>) contains a series of useful functions like <code class="language-plaintext highlighter-rouge">malloc</code>, <code class="language-plaintext highlighter-rouge">free</code>, <code class="language-plaintext highlighter-rouge">printf</code>, <code class="language-plaintext highlighter-rouge">memcpy</code> (<a href="https://docs.microsoft.com/en-us/cpp/c-runtime-library/reference/crt-alphabetical-function-reference?view=msvc-160">MSVC</a>, <a href="https://gcc.gnu.org/onlinedocs/gcc/Other-Builtins.html#Other-Builtins">GCC</a> ) for interacting with the OS which almost every program needs. This part can be statically or dynamically linked. Windows provides libcmt.lib for C and libcpmt.lib for C++. 
+If one chooses to link it statically, only the code called by the user’s program gets added to its binary, increasing the size. Removing stdlib can significantly reduce the binary size, which could be as significant as 90% in tiny programs. If one has to create the C code binary with smallest size, this would be the key step in reducing binary size to ~ 1 kb.</p>
 
-<span class="kt">int</span> <span class="n">WINAPI</span> <span class="nf">wWinMain</span><span class="p">(</span><span class="n">HINSTANCE</span> <span class="n">hInstance</span><span class="p">,</span> <span class="n">HINSTANCE</span><span class="p">,</span> <span class="n">PWSTR</span> <span class="n">pCmdLine</span><span class="p">,</span> <span class="kt">int</span> <span class="n">nCmdShow</span><span class="p">)</span>
-<span class="p">{</span>
-    <span class="c1">// Register the window class.</span>
-    <span class="k">const</span> <span class="kt">wchar_t</span> <span class="n">CLASS_NAME</span><span class="p">[]</span>  <span class="o">=</span> <span class="s">L"Sample Window Class"</span><span class="p">;</span>
-    
-    <span class="n">WNDCLASS</span> <span class="n">wc</span> <span class="o">=</span> <span class="p">{</span> <span class="p">};</span>
+<p>If one dynamically links to CRT, this size bump is not there (it is standard for programs to dynamically link to this library for multiple reasons like compatibility with other dll, apart from small size saving). Every OS provides an implementation. <code class="language-plaintext highlighter-rouge">UCRT.dll</code> on Windows and <code class="language-plaintext highlighter-rouge">libc.so</code> (GLibc) on Linux.</p>
 
-    <span class="n">wc</span><span class="p">.</span><span class="n">lpfnWndProc</span>   <span class="o">=</span> <span class="n">WindowProc</span><span class="p">;</span>
-    <span class="n">wc</span><span class="p">.</span><span class="n">hInstance</span>     <span class="o">=</span> <span class="n">hInstance</span><span class="p">;</span>
-    <span class="n">wc</span><span class="p">.</span><span class="n">lpszClassName</span> <span class="o">=</span> <span class="n">CLASS_NAME</span><span class="p">;</span>
-
-    <span class="n">RegisterClass</span><span class="p">(</span><span class="o">&amp;</span><span class="n">wc</span><span class="p">);</span>
-
-    <span class="c1">// Create the window.</span>
-
-    <span class="n">HWND</span> <span class="n">hwnd</span> <span class="o">=</span> <span class="n">CreateWindowEx</span><span class="p">(</span>
-        <span class="mi">0</span><span class="p">,</span>                              <span class="c1">// Optional window styles.</span>
-        <span class="n">CLASS_NAME</span><span class="p">,</span>                     <span class="c1">// Window class</span>
-        <span class="s">L"Learn to Program Windows"</span><span class="p">,</span>    <span class="c1">// Window text</span>
-        <span class="n">WS_OVERLAPPEDWINDOW</span><span class="p">,</span>            <span class="c1">// Window style</span>
-
-        <span class="c1">// Size and position</span>
-        <span class="n">CW_USEDEFAULT</span><span class="p">,</span> <span class="n">CW_USEDEFAULT</span><span class="p">,</span> <span class="n">CW_USEDEFAULT</span><span class="p">,</span> <span class="n">CW_USEDEFAULT</span><span class="p">,</span>
-
-        <span class="nb">NULL</span><span class="p">,</span>       <span class="c1">// Parent window    </span>
-        <span class="nb">NULL</span><span class="p">,</span>       <span class="c1">// Menu</span>
-        <span class="n">hInstance</span><span class="p">,</span>  <span class="c1">// Instance handle</span>
-        <span class="nb">NULL</span>        <span class="c1">// Additional application data</span>
-        <span class="p">);</span>
-
-    <span class="k">if</span> <span class="p">(</span><span class="n">hwnd</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span>
-    <span class="p">{</span>
-        <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-    <span class="p">}</span>
-
-    <span class="n">ShowWindow</span><span class="p">(</span><span class="n">hwnd</span><span class="p">,</span> <span class="n">nCmdShow</span><span class="p">);</span>
-
-    <span class="c1">// Run the message loop.</span>
-
-    <span class="n">MSG</span> <span class="n">msg</span> <span class="o">=</span> <span class="p">{</span> <span class="p">};</span>
-    <span class="k">while</span> <span class="p">(</span><span class="n">GetMessage</span><span class="p">(</span><span class="o">&amp;</span><span class="n">msg</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
-    <span class="p">{</span>
-        <span class="n">TranslateMessage</span><span class="p">(</span><span class="o">&amp;</span><span class="n">msg</span><span class="p">);</span>
-        <span class="n">DispatchMessage</span><span class="p">(</span><span class="o">&amp;</span><span class="n">msg</span><span class="p">);</span>
-    <span class="p">}</span>
-
-    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
-
-<span class="n">LRESULT</span> <span class="n">CALLBACK</span> <span class="nf">WindowProc</span><span class="p">(</span><span class="n">HWND</span> <span class="n">hwnd</span><span class="p">,</span> <span class="n">UINT</span> <span class="n">uMsg</span><span class="p">,</span> <span class="n">WPARAM</span> <span class="n">wParam</span><span class="p">,</span> <span class="n">LPARAM</span> <span class="n">lParam</span><span class="p">)</span>
-<span class="p">{</span>
-    <span class="k">switch</span> <span class="p">(</span><span class="n">uMsg</span><span class="p">)</span>
-    <span class="p">{</span>
-    <span class="k">case</span> <span class="n">WM_DESTROY</span><span class="p">:</span>
-        <span class="n">PostQuitMessage</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
-        <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-
-    <span class="k">case</span> <span class="n">WM_PAINT</span><span class="p">:</span>
-        <span class="p">{</span>
-            <span class="n">PAINTSTRUCT</span> <span class="n">ps</span><span class="p">;</span>
-            <span class="n">HDC</span> <span class="n">hdc</span> <span class="o">=</span> <span class="n">BeginPaint</span><span class="p">(</span><span class="n">hwnd</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">ps</span><span class="p">);</span>
-
-
-
-            <span class="n">FillRect</span><span class="p">(</span><span class="n">hdc</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">ps</span><span class="p">.</span><span class="n">rcPaint</span><span class="p">,</span> <span class="p">(</span><span class="n">HBRUSH</span><span class="p">)</span> <span class="p">(</span><span class="n">COLOR_WINDOW</span><span class="o">+</span><span class="mi">1</span><span class="p">));</span>
-
-            <span class="n">EndPaint</span><span class="p">(</span><span class="n">hwnd</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">ps</span><span class="p">);</span>
-        <span class="p">}</span>
-        <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-
-    <span class="p">}</span>
-    <span class="k">return</span> <span class="n">DefWindowProc</span><span class="p">(</span><span class="n">hwnd</span><span class="p">,</span> <span class="n">uMsg</span><span class="p">,</span> <span class="n">wParam</span><span class="p">,</span> <span class="n">lParam</span><span class="p">);</span>
-<span class="p">}</span>
-</code></pre></div></div>
-<p>On first glance, this looks way bigger and unnecessarily complicated. But it is showcasing a lot of functionalities for creating a GUI windows application. It launches a typical rectangular UI window filled with a background color. It has a functional UI, proper keyboard and mouse support and even event processing.  Unlike other hello world programs for other platforms which are of little use outside of tutorials and first programs, this hello world is the foundation of any Win32 giant codebase out there. It teaches you all the basic things needed to program on Windows. Whether it is Photoshop or Firefox for Windows, they will have this piece of code somewhere in their giant codebases.  <br />
-Now that, it is out of the way, let’s follow this code block by block.</p>
-
-<h1 id="anatomy">Anatomy</h1>
-<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#ifndef UNICODE
-#define UNICODE
-#endif   
-#include &lt;windows.h&gt;    
-</span></code></pre></div></div>
-<p>Over the years, Windows programming has undergone large changes, like move from 16-bit to 32-bit api in Win95, move to NT kernel with XP and later changes for Vista and Windows 8. Any app whether the one developed in 1995 or in 2008 which calls windows.h continues to work in the latest version of Windows (excellent backward compatibility). Windows.h and Win32 apis do a lot of heavy duty work to ensure that all these apps remain compatible even when they are all including the same header.  For example, if you are developing a new app which uses a legacy component (from Windows 95 era referring to windows.h header files of that era ),  it is possible that your new component and legacy component will consume the same windows.h (from latest Windows SDK) and yet, pick up the era-appropriate functions.</p>
-
-<p>It is a catch-all header for most common windows system calls. Windows.h, a small file on its own, carries forward declaration for multiple headers. For this hello world code, the apis are in winuser.h and linked using user32.dll. For any other functionality, some other header might be needed. Windows.h makes it easy by acting as a <strong>“router”</strong> for all these headers. You only need to include windows.h header and you get all this functionality. As MSDN page mentions, you can carefully select a different or smaller subset of functionality by defining few global identifiers like UNICODE here which indicates to use unicode variant of specific apis, denoted by W. <code class="language-plaintext highlighter-rouge">CreateFoo</code> resolves to <code class="language-plaintext highlighter-rouge">CreateFooW</code> <a href="https://docs.microsoft.com/en-us/windows/win32/winprog/using-the-windows-headers">More here</a>.</p>
-
-<h2 id="main-function">Main function</h2>
-<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="n">WINAPI</span> <span class="nf">wWinMain</span><span class="p">(</span><span class="n">HINSTANCE</span> <span class="n">hInstance</span><span class="p">,</span> <span class="n">HINSTANCE</span><span class="p">,</span> <span class="n">PWSTR</span> <span class="n">pCmdLine</span><span class="p">,</span> <span class="kt">int</span> <span class="n">nCmdShow</span><span class="p">)</span>
-<span class="p">{</span>
-    <span class="c1">// Register the window class.</span>
-    <span class="k">const</span> <span class="kt">wchar_t</span> <span class="n">CLASS_NAME</span><span class="p">[]</span>  <span class="o">=</span> <span class="s">L"Sample Window Class"</span><span class="p">;</span>
-    
-    <span class="n">WNDCLASS</span> <span class="n">wc</span> <span class="o">=</span> <span class="p">{</span> <span class="p">};</span>
-
-    <span class="n">wc</span><span class="p">.</span><span class="n">lpfnWndProc</span>   <span class="o">=</span> <span class="n">WindowProc</span><span class="p">;</span>
-    <span class="n">wc</span><span class="p">.</span><span class="n">hInstance</span>     <span class="o">=</span> <span class="n">hInstance</span><span class="p">;</span>
-    <span class="n">wc</span><span class="p">.</span><span class="n">lpszClassName</span> <span class="o">=</span> <span class="n">CLASS_NAME</span><span class="p">;</span>
-
-    <span class="n">RegisterClass</span><span class="p">(</span><span class="o">&amp;</span><span class="n">wc</span><span class="p">);</span>
-
-    <span class="c1">// Create the window.</span>
-
-    <span class="n">HWND</span> <span class="n">hwnd</span> <span class="o">=</span> <span class="n">CreateWindowEx</span><span class="p">(</span>
-        <span class="mi">0</span><span class="p">,</span>                              <span class="c1">// Optional window styles.</span>
-        <span class="n">CLASS_NAME</span><span class="p">,</span>                     <span class="c1">// Window class</span>
-        <span class="s">L"Learn to Program Windows"</span><span class="p">,</span>    <span class="c1">// Window text</span>
-        <span class="n">WS_OVERLAPPEDWINDOW</span><span class="p">,</span>            <span class="c1">// Window style</span>
-
-        <span class="c1">// Size and position</span>
-        <span class="n">CW_USEDEFAULT</span><span class="p">,</span> <span class="n">CW_USEDEFAULT</span><span class="p">,</span> <span class="n">CW_USEDEFAULT</span><span class="p">,</span> <span class="n">CW_USEDEFAULT</span><span class="p">,</span>
-
-        <span class="nb">NULL</span><span class="p">,</span>       <span class="c1">// Parent window    </span>
-        <span class="nb">NULL</span><span class="p">,</span>       <span class="c1">// Menu</span>
-        <span class="n">hInstance</span><span class="p">,</span>  <span class="c1">// Instance handle</span>
-        <span class="nb">NULL</span>        <span class="c1">// Additional application data</span>
-        <span class="p">);</span>
-
-    <span class="k">if</span> <span class="p">(</span><span class="n">hwnd</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span>
-    <span class="p">{</span>
-        <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-    <span class="p">}</span>
-
-    <span class="n">ShowWindow</span><span class="p">(</span><span class="n">hwnd</span><span class="p">,</span> <span class="n">nCmdShow</span><span class="p">);</span>
-
-    <span class="c1">// Run the message loop.</span>
-
-    <span class="n">MSG</span> <span class="n">msg</span> <span class="o">=</span> <span class="p">{</span> <span class="p">};</span>
-    <span class="k">while</span> <span class="p">(</span><span class="n">GetMessage</span><span class="p">(</span><span class="o">&amp;</span><span class="n">msg</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
-    <span class="p">{</span>
-        <span class="n">TranslateMessage</span><span class="p">(</span><span class="o">&amp;</span><span class="n">msg</span><span class="p">);</span>
-        <span class="n">DispatchMessage</span><span class="p">(</span><span class="o">&amp;</span><span class="n">msg</span><span class="p">);</span>
-    <span class="p">}</span>
-
-    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></div></div>
-<p>It is the entry point to the program. Win32 allows for 4 different entrypoints to choose from, if needed, using <a href="https://docs.microsoft.com/en-us/cpp/build/reference/entry-entry-point-symbol?view=vs-2019">/entry</a> linker option. On a quick glance, there are a lot of 0s and NULLs passed as arguments in functions. Many of these functions have existed since the inception of Win32 apis and have changed in their behavior. Thus, many of the arguments no longer have any effect and are left for compatibility sake. These arguments are always NULL or 0. For the rest of the arguments, flags can be combined with logical OR |.</p>
 <blockquote>
-  <p>The code uses a now outdated <a href="https://en.wikipedia.org/wiki/Hungarian_notation">hungarian notation</a> for variable naming where type of variable is prefixed before the name. Variable <code class="language-plaintext highlighter-rouge">bvalue</code> indicates that it is a variable of type bool. MSDN provides a handy <a href="https://docs.microsoft.com/en-us/windows/win32/stg/coding-style-conventions">guide</a> to read and understand variable names with these notations. <code class="language-plaintext highlighter-rouge">lpsz</code> in <code class="language-plaintext highlighter-rouge">lpszClassName</code> stands for long pointer (historically, a 16-bit pointer but a normal 32-bit/64-bit pointer in modern times) to string (ending in /0). <code class="language-plaintext highlighter-rouge">lpfn</code> in <code class="language-plaintext highlighter-rouge">lpfnWndProc</code> stands for function pointer. Microsoft <a href="https://docs.microsoft.com/en-us/dotnet/standard/design-guidelines/general-naming-conventions">advises against</a> using hungarian notation for modern Windows programming as it adds very little value and yet makes the code much harder to read. <a href="https://www.joelonsoftware.com/2005/05/11/making-wrong-code-look-wrong/">Joel On Software</a> also has a good article on it.</p>
+  <p>Normal dynamic loading of dll rule applies : If the program loads two different versions of CRT dll, they won’t share global variables. Not taking care of this fact could cause very subtle bugs in multi-dll codebases,  in calling runtime functions which maintain any state.</p>
 </blockquote>
 
-<p>Another interesting artifact of the past are wParam and lParam parameters. Before Win95, Windows was 16-bit OS. wParam was WORD param which was 16-bit and lparam was LONG param which was 32-bit. With Win95,Windows moved to 32-bit era and both WORD and LONG are now 32-bit (or 64-bit based on arch) so there is no difference between wParam and lParam.  <br />
-HINSTANCE is another once of these - handle to an instance. This <a href="https://devblogs.microsoft.com/oldnewthing/20050418-59/?p=35873">blogpost by Raymond Chen</a> does a good job of explaining the reasoning behind it.</p>
+<p>A user code cannot be faster than its runtime library’s performance.
+Runtime libraries keep getting improvements through updates and one can receive those fixes as part of VC++Runtime updates on Windows or libc updates on Linux. Programs compiled with a specific CRT lib may expect that specific or compatible CRT dll. Thus, it is possible to keep side by side copies of different versions of CRT dlls (<a href="https://en.wikipedia.org/wiki/DLL_Hell">DLL hell ?</a>).</p>
 
-<h2 id="window-of-windows---hwnd-pronounced-as-h-wind">Window of Windows - Hwnd (pronounced as H-wind)</h2>
+<h2 id="all-you-need-is-c">All you need is C</h2>
+<p>C runtime is an interesting piece of software - it depends not only on OS and architecture but also on compiler. To give an example, runtime code generated on 64 bit windows by GCC would be different from that generated by MSVC. 
+If you want to port C to a brand new OS,  all you need apart from the compiler is a working C runtime and that’s it, C gets ported.</p>
 
-<h3 id="what-is-an-hwnd-">What is an Hwnd ?</h3>
-<p><img src="https://docs.microsoft.com/en-us/windows/win32/learnwin32/images/window01.png" alt="picture of a window UI" title="Hwnd" /></p>
-
-<p><strong>“Obviously, windows are central to Windows. They are so important that they named the operating system after them.”</strong> - <a href="https://docs.microsoft.com/en-us/windows/win32/learnwin32/what-is-a-window-">Official MSDN quote</a>  <br />
-A window is a rectangular area on the screen that receives user input and displays output in the form of text and graphics. In Win32 programming convention, a window is referenced by <em>HWND</em> - handle to a window. A handle is a numerical value associated with that window. In the kernel, an object is created for every window with an unique id. If a window is a person, hwnd is its name.
-<img src="https://i.imgur.com/zHcxvkF.jpg" alt="The room movie meme about oh hi hwnd" title="I haven't seen this movie nor I am going to. I will be using it for making memes though" /></p>
-
-<h3 id="everything-is-an-hwnd">Everything is an HWND</h3>
-<p>In a true spirit of the movie Inception, every UI element in a typical hwnd is a hwnd itself (think recursions). This is achieved using child windows/owned windows. This leads to a lot of HWNDs in a moderately complex app.
-<img src="https://docs.microsoft.com/en-us/windows/win32/learnwin32/images/window04.png" alt="parent child relation of hwnd and child hwnds" title="&quot;)
-Frameworks like XAML(WinUI), WPF have found non-HWND ways to create UI elements but it is still pervasive enough. [Spy++](https://docs.microsoft.com/en-us/visualstudio/debugger/introducing-spy-increment?view=vs-2019), bundled with Visual Studio, is a good tool to visualize that.
-![picture of Spy++](https://d2.alternativeto.net/dist/s/e36616b5-49b2-e011-9727-0025902c7e73_2_full.png?format=jpg&amp;width=1600&amp;height=1600&amp;mode=min&amp;upscale=false &quot;hello world code isn't the only thing that hasn't changed in a long time" /></p>
-
-<p>Modern Windows HWNDs are hardware accelerated i.e. take help of graphics pipelines like Direct2D to draw pixels faster, using a GPU. <a href="https://en.wikipedia.org/wiki/Desktop_Window_Manager">Desktop Window Manager (DWM)</a> handles drawing pixels on modern Windows.</p>
-
-<p>Hwnd registration and window messaging system are the few pieces of code here which are reminiscent of very 80s Object Oriented (OO) design. Microsoft was on-board OO train very early on, even when it was not totally accepted by the industry. It was when Microsoft had been using only C for programming Windows. OO in C required a lot of weird design choices in Windows and because of backward compatibility, a lot of that design has stayed to this day.</p>
-
-<h3 id="register-the-window-class-with-os">Register the window class with OS</h3>
-<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Register the window class.</span>
-    <span class="k">const</span> <span class="kt">wchar_t</span> <span class="n">CLASS_NAME</span><span class="p">[]</span>  <span class="o">=</span> <span class="s">L"Sample Window Class"</span><span class="p">;</span>
-    
-    <span class="n">WNDCLASS</span> <span class="n">wc</span> <span class="o">=</span> <span class="p">{</span> <span class="p">};</span>
-
-    <span class="n">wc</span><span class="p">.</span><span class="n">lpfnWndProc</span>   <span class="o">=</span> <span class="n">WindowProc</span><span class="p">;</span>
-    <span class="n">wc</span><span class="p">.</span><span class="n">hInstance</span>     <span class="o">=</span> <span class="n">hInstance</span><span class="p">;</span>
-    <span class="n">wc</span><span class="p">.</span><span class="n">lpszClassName</span> <span class="o">=</span> <span class="n">CLASS_NAME</span><span class="p">;</span>
-
-    <span class="n">RegisterClass</span><span class="p">(</span><span class="o">&amp;</span><span class="n">wc</span><span class="p">);</span>
-</code></pre></div></div>
-
-<p>Windows has a weird way of doing inheritance. You will have to register your newly created hwnd object with OS for it to start communicating with it.</p>
-
-<h3 id="create-the-window">Create the Window</h3>
-<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Create the window.</span>
-    <span class="n">HWND</span> <span class="n">hwnd</span> <span class="o">=</span> <span class="n">CreateWindowEx</span><span class="p">(</span>
-        <span class="mi">0</span><span class="p">,</span>                              <span class="c1">// Optional window styles.</span>
-        <span class="n">CLASS_NAME</span><span class="p">,</span>                     <span class="c1">// Window class</span>
-        <span class="s">L"Learn to Program Windows"</span><span class="p">,</span>    <span class="c1">// Window text</span>
-        <span class="n">WS_OVERLAPPEDWINDOW</span><span class="p">,</span>            <span class="c1">// Window style</span>
-
-        <span class="c1">// Size and position</span>
-        <span class="n">CW_USEDEFAULT</span><span class="p">,</span> <span class="n">CW_USEDEFAULT</span><span class="p">,</span> <span class="n">CW_USEDEFAULT</span><span class="p">,</span> <span class="n">CW_USEDEFAULT</span><span class="p">,</span>
-
-        <span class="nb">NULL</span><span class="p">,</span>       <span class="c1">// Parent window    </span>
-        <span class="nb">NULL</span><span class="p">,</span>       <span class="c1">// Menu</span>
-        <span class="n">hInstance</span><span class="p">,</span>  <span class="c1">// Instance handle</span>
-        <span class="nb">NULL</span>        <span class="c1">// Additional application data</span>
-        <span class="p">);</span>
-
-    <span class="k">if</span> <span class="p">(</span><span class="n">hwnd</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span>
-    <span class="p">{</span>
-        <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-    <span class="p">}</span>
-</code></pre></div></div>
-<p>This code creates the HWND. We provide the window classes (we just registered) to be associated with this hwnd. Window creation api is very <a href="https://docs.microsoft.com/en-us/windows/win32/apiindex/windows-api-list">rich</a> and can create 100s windows with different configurations and behaviors. One good example is creation of child windows. Since everything is a window. A button within a UI window is a child to that hwnd. That means the parent window can handle processing of messages for that child window. This kind of hierarchy is extremely useful. It is an implementation of inheritance concept from the OO paradigm. In this way, you can add a new window as child window of parent window and you don’t have to write any additional code for its basic operations like resize, maximize, close etc.</p>
-
-<h3 id="show-the-window">Show the window</h3>
-<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ShowWindow</span><span class="p">(</span><span class="n">hwnd</span><span class="p">,</span> <span class="n">nCmdShow</span><span class="p">);</span>
-</code></pre></div></div>
-<p>Unsurprisingly, it shows the window on the screen. What is the point of explicitly calling show window ? There are many cases where a window is not shown directly. It can be created with the above command and updated using UpdateWindow and when ready, shown to the screen. There is also AnimateWindow for doing 90s PPT slide like transition animations which nobody should use in modern day and age.</p>
-
-<h2 id="windows-messaging-system">Windows messaging system</h2>
-<p>Windows messaging system is a event-driven system achieved using polymorphism. The OS communicates to the program by passing messages and it will call a special function in your program to give you an option to deal with those messages. These messages can be keyboard, mouse, touch events generated on interacting with your program, or OS created events like when your program is minimized, maximized or closed. 
-For this message passing model, Windows creates a single message queue for a thread which handles all the messages for HWNDs created on that thread.</p>
-
-<h3 id="message-loop">Message loop</h3>
-<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Run the message loop.</span>
-
-    <span class="n">MSG</span> <span class="n">msg</span> <span class="o">=</span> <span class="p">{</span> <span class="p">};</span>
-    <span class="k">while</span> <span class="p">(</span><span class="n">GetMessage</span><span class="p">(</span><span class="o">&amp;</span><span class="n">msg</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
-    <span class="p">{</span>
-        <span class="n">TranslateMessage</span><span class="p">(</span><span class="o">&amp;</span><span class="n">msg</span><span class="p">);</span>
-        <span class="n">DispatchMessage</span><span class="p">(</span><span class="o">&amp;</span><span class="n">msg</span><span class="p">);</span>
-    <span class="p">}</span>
-</code></pre></div></div>
-
-<p>Message loop code is what is responsible for filing up this message queue.  There has to be only one message loop per thread. This message queue is hidden and not accessible by your code. It is handled entirely by the OS. All your code can do is to remove the topmost message from this queue using <code class="language-plaintext highlighter-rouge">GetMessage()</code> api call. This message is then translated for keyboard input so that it can handle shortcut keys and do other keyboard input processing (<a href="https://stackoverflow.com/questions/12581889/why-exactly-translatemessage">Read more here on TranslateMessage</a>). After that, it is dispatched to the handler function WndProc (discussed below).  <code class="language-plaintext highlighter-rouge">GetMessage</code> is a blocking function so it will wait if the loop is empty. But this doesn’t mean your UI will be unresponsive. An alternative to that is <code class="language-plaintext highlighter-rouge">PeekMessage</code> function which can peek and tell if there is a message on top of the queue. Since it won’t block, it is good for certain scenarios to do a <em>“Peek”</em> before a <em>“Get”</em>.</p>
-
-<h3 id="wndproc---the-most-important-function-in-your-code">WndProc - the most important function in your code</h3>
-<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">LRESULT</span> <span class="n">CALLBACK</span> <span class="nf">WindowProc</span><span class="p">(</span><span class="n">HWND</span> <span class="n">hwnd</span><span class="p">,</span> <span class="n">UINT</span> <span class="n">uMsg</span><span class="p">,</span> <span class="n">WPARAM</span> <span class="n">wParam</span><span class="p">,</span> <span class="n">LPARAM</span> <span class="n">lParam</span><span class="p">)</span>
-<span class="p">{</span>
-    <span class="k">switch</span> <span class="p">(</span><span class="n">uMsg</span><span class="p">)</span>
-    <span class="p">{</span>
-    <span class="k">case</span> <span class="n">WM_DESTROY</span><span class="p">:</span>
-        <span class="n">PostQuitMessage</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
-        <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-
-    <span class="k">case</span> <span class="n">WM_PAINT</span><span class="p">:</span>
-        <span class="p">{</span>
-            <span class="n">PAINTSTRUCT</span> <span class="n">ps</span><span class="p">;</span>
-            <span class="n">HDC</span> <span class="n">hdc</span> <span class="o">=</span> <span class="n">BeginPaint</span><span class="p">(</span><span class="n">hwnd</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">ps</span><span class="p">);</span>
-
-
-
-            <span class="n">FillRect</span><span class="p">(</span><span class="n">hdc</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">ps</span><span class="p">.</span><span class="n">rcPaint</span><span class="p">,</span> <span class="p">(</span><span class="n">HBRUSH</span><span class="p">)</span> <span class="p">(</span><span class="n">COLOR_WINDOW</span><span class="o">+</span><span class="mi">1</span><span class="p">));</span>
-
-            <span class="n">EndPaint</span><span class="p">(</span><span class="n">hwnd</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">ps</span><span class="p">);</span>
-        <span class="p">}</span>
-        <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-
-    <span class="p">}</span>
-    <span class="k">return</span> <span class="n">DefWindowProc</span><span class="p">(</span><span class="n">hwnd</span><span class="p">,</span> <span class="n">uMsg</span><span class="p">,</span> <span class="n">wParam</span><span class="p">,</span> <span class="n">lParam</span><span class="p">);</span>
-<span class="p">}</span>
-</code></pre></div></div>
-<p><code class="language-plaintext highlighter-rouge">WndProc</code> is the special function which has to be present in every Win32 program code, either directly or indirectly.  It is the function which Windows OS calls whenever it has to communicate anything with your running code. 
-It usually has a giant switch statement for handling window messages like <code class="language-plaintext highlighter-rouge">WM_DESTROY</code> (what to do when a user clicks on the small x on the top-right of the window). It can choose to ignore it and it won’t close the window. Thankfully, there are other ways to close a window. This shows the level of control and flexibility Windows OS provides to developers which can be beneficial but can also be misused and the recent Windows programming model has evolved to counter that. 
-PostQuitMessage adds a <code class="language-plaintext highlighter-rouge">WM_QUIT</code> message to the message queue which causes <code class="language-plaintext highlighter-rouge">GetMessage()</code> to false, exiting the loop and exiting the program.
-Your program doesn’t have to handle all the messages. It can handle a few special messages of interest and then call <code class="language-plaintext highlighter-rouge">DefWindowProc</code> - OS provided default handler to deal with the rest. <code class="language-plaintext highlighter-rouge">WndProc</code> can choose to handle messages for all windows in a thread or it can defer them to respective WndProc to handle.  See <a href="https://docs.microsoft.com/en-us/windows/win32/api/commctrl/nf-commctrl-defsubclassproc">Subclassing</a> as example of dynamic polymorphism to achieve that.</p>
-
-<h3 id="painting-the-window">Painting the window</h3>
-<p>The code within <code class="language-plaintext highlighter-rouge">case WM_PAINT</code>  is the boilerplate code for drawing anything in a window. Windows Graphics Driver Interface (GDI) is immediate mode (link to it). A lot of newer UI libraries like WPF and WinUI are retained mode GUI frameworks because of memory and performance reasons. MSDN’s  Painting the Window - Win32 apps does a very good job of explaining this code.</p>
-
-<h2 id="compilation">Compilation</h2>
-<p>MSVC is the compiler of choice. It can be compiled with Visual Studio or in terminal using msbuild. It needs kernel32.dll, user32.dll, gdi32.dll and /SUBSYSTEM:WINDOWS. Yes, the concept of subsystem has existed since start of Windows NT (because Windows was supposed to run OS/2 as subsystem which didn’t happen). That was helpful when Windows introduced Windows Subsystem for Linux (<a href="https://en.wikipedia.org/wiki/Windows_Subsystem_for_Linux">WSL</a>) 30+ years later.</p>
-
-<h1 id="ending-notes">Ending notes</h1>
-<p>Thank you for reaching this far. The idea of this post came while I started learning Win32 apis for my work. MSDN does a good job of explaining the api but outside of that, a very little number of articles and blogs exist. This article aims to improve on that.  <br />
-If you find any mistakes on the blog or have any other suggestions, let me know on twitter.</p>
+<p>Thanks for reading this far. For the last couple of months, I have been interested in inner workings of C and C++ ecosystem. This is an article in that direction. Tweet any suggestions or corrections to me at <a href="https://twitter.com/pratikone">@pratikone</a></p>
 
 <h2 id="references">References</h2>
-<ul>
-  <li><a href="https://docs.microsoft.com/en-us/cpp/windows/overview-of-windows-programming-in-cpp?view=vs-2019">MSDN</a></li>
-  <li><a href="https://www.amazon.com/Programming-Windows%C2%AE-Fifth-Developer-Reference/dp/157231995X">Programming Windows by Charles Petzold 1998 edition</a></li>
-</ul>
+<p><a href="https://stackoverflow.com/questions/2709998/crt0-o-and-crt1-o-whats-the-difference">https://stackoverflow.com/questions/2709998/crt0-o-and-crt1-o-whats-the-difference</a></p>
+
+<p><a href="http://www.vishalchovatiya.com/crt-run-time-before-starting-main">http://www.vishalchovatiya.com/crt-run-time-before-starting-main</a></p>
+
+<p><a href="https://blogs.oracle.com/linux/hello-from-a-libc-free-world-part-1-v2">https://blogs.oracle.com/linux/hello-from-a-libc-free-world-part-1-v2</a></p>
+
+<p><a href="https://docs.microsoft.com/en-us/cpp/c-runtime-library/c-run-time-library-reference?view=msvc-160">https://docs.microsoft.com/en-us/cpp/c-runtime-library/c-run-time-library-reference?view=msvc-160</a></p>
+
+<p><a href="https://gcc.gnu.org/onlinedocs/gcc/Other-Builtins.html#Other-Builtins">https://gcc.gnu.org/onlinedocs/gcc/Other-Builtins.html#Other-Builtins</a></p>
 
   </div>
   
@@ -392,7 +147,7 @@ If you find any mistakes on the blog or have any other suggestions, let me know 
 
 <div class="pagination">
   
-    <span class="pagination-item older">Older</span>
+    <a class="pagination-item older" href="http://localhost:4000/page2">Older</a>
   
   
     <span class="pagination-item newer">Newer</span>
