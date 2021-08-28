@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Does C have a runtime ?"
-date:   2020-06-07 14:29:37 -0700
+date:   2020-12-22 14:29:37 -0700
 categories: c
 ---
 
