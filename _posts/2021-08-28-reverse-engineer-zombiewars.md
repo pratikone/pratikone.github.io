@@ -78,7 +78,7 @@ I was excited. I found the treasure of my childhood games which I could play on 
 
 # Reverse engineering the binary
 
-I knew these packed files were custom and could be compressed, I started with .EXE file ZWARS.exe to see how it is extracting resources. The first step of RE is to find how to extract resources. String utility (https://docs.microsoft.com/en-us/sysinternals/downloads/strings) came very handy. It just dumps out all strings it could find in a binary but that is important. Many compilers leave their name as a string in binary so I could get that information. And yes, I found it. Delphi 2.0  in the strings. Delphi !! That meant it uses Object Pascal with [Delphi IDE](https://en.wikipedia.org/wiki/Delphi_(software)). Success …
+I knew these packed files were custom and could be compressed, I started with .EXE file ZWARS.exe to see how it is extracting resources. The first step of RE is to find how to extract resources. [String utility](https://docs.microsoft.com/en-us/sysinternals/downloads/strings) came very handy. It just dumps out all strings it could find in a binary but that is important. Many compilers leave their name as a string in binary so I could get that information. And yes, I found it. Delphi 2.0  in the strings. Delphi !! That meant it uses Object Pascal with [Delphi IDE](https://en.wikipedia.org/wiki/Delphi_(software)). Success …
 
 My excitement dampened when  I found that none of the modern state of the art RE tools can reverse engineer 16-bit delphi code properly yet. It was kind of sad, I tried IDA Free, NSA Ghidra, Reko and few others to limited success. Even with these limitations, I was able to identify the main game loop. Given that my assembly and binary experience is rudimentary at best, I was very happy with myself. 
 
@@ -91,25 +91,25 @@ The asset binary file followed this pattern :
 * Ending signature (8 bytes)
 * Binary blob to be accessed by offset
 
-Example : if file names are `harry.RAW`, offset 4, size 20 and `diane.RAW`, offset 10, size 20 the file names need to be 12 bytes long. If a filename is shorter than 12 bytes, filler content is used. In this case, harry.raw becomes harry.RAWRAW and diane.RAWRAW. And stored like
+Example : if file names are `harry.RAW`, offset 4, size 20 and `diane.RAW`, offset 10, size 20 the file names need to be 12 bytes long. If a filename is shorter than 12 bytes, filler content is used. In this case, harry.raw becomes `harry.RAWRAW` and `diane.RAWRAW`. And stored like
 * `harry.RAWRAW` [12 in big endian] [20 in big endian] [1 bit of unknown data]
 
 * `diane.RAWRAW` [12 in big endian] [20 in big endian] [1 bit of unknown data]  
 
 * [8 byte of signature to indicate end of the list]
 
-* Binary blog starting with contents of `harry.RAWRAW` starting with signature mhwanh because HSI RAW format start with that sign
+* Binary blog starting with contents of `harry.RAWRAW` starting with signature `mhwanh` because HSI RAW format start with that sign
 
 
 The offset as well as size were stored in big endian than usual little endian format. Maybe it was an obfuscation technique ?  It was a surprising discovery which was missing in scripts. Once found, I was quickly able to develop an algorithm to extract it. 
-Once the algorithm became clear, I wanted to test it out using my own script. I wrote a python script to extract all the files. Used `deark` to turn RAW images to something else. These are non standard raw so more guesswork was needed but it was done.
+Once the algorithm became clear, I wanted to test it out using my own script. I wrote a python script to extract all the files. Used [`deark`](https://entropymine.com/deark/) to turn RAW images to something else. These are non standard raw so more guesswork was needed but it was done.
 
 You can access the python script here : [https://gist.github.com/pratikone/f0fbd11c3e16a4e852e9c0bbef891b73](https://gist.github.com/pratikone/f0fbd11c3e16a4e852e9c0bbef891b73)
 
 > There are still image formats which I am unable to decode (`.SPR`, `.BIN`) as well as game level files (`.H95`). If interested,  people are welcome to contribute to this open-source script and help in digital preservation of this game.
 
 # My learnings :
-This whole project has beena super fun experience. This is my first foray into the world of reverse engineering retro games and I have gained a lot of knowledge. I became aware of specialized tools, modding communities and multiple video game archiving sites. I also got a good historical insight to the state of dos game development in early 90s.   
+This whole project has been a super fun experience. This is my first foray into the world of reverse engineering retro games and I have gained a lot of knowledge. I became aware of specialized tools, modding communities and multiple video game archiving sites. I also got a good historical insight to the state of dos game development in early 90s.   
 On technical side of things, my hex reading got stronger 😁. For the future, I will be increasing my assembly code understanding skills to mount another attempt at reverse engineering the game logic. 
 
 I have uploaded all the files to [**Internet Archive**](https://archive.org/details/zombiewars) for digital preservation, including original game files (as they are now abandonware software, you cannot buy them anywhere) as well as game assets, tools and the [ asset extraction script](https://gist.github.com/pratikone/f0fbd11c3e16a4e852e9c0bbef891b73) I have developed.
