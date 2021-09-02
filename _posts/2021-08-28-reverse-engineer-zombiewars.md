@@ -61,7 +61,7 @@ Then through some modding site, I stumbled across [Wombat](https://www.szevvy.co
 
 And music files in midi format and wave. I got the Yamaha OPL 3 sf file to play it from 1993, also got the date right because of historical context. . Crazy how a midi sound [changes](https://www.youtube.com/watch?v=JiZOxUhQj10) depending on the audio hardware. A lot of fun.    
 
-Listen this to the peppy [main track](https://archive.org/details/zombiewars/GAME1.mp3).
+Listen this to the peppy [main track](https://archive.org/details/zombiewars/GAME1.mp3)▶️.
 
 
 The game’s assets are :
